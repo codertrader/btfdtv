@@ -9,6 +9,16 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="text/javascript">
+  (function(d) {
+    var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
+    cwjs = d.createElement('script'); cwjs.type = 'text/javascript'; cwjs.async = true; cwjs.id = id
+    cwjs.src = "//chatwing.com/code/76d898a5-08ba-4245-9638-7ffbd03e5b23/popout";
+    d.getElementsByTagName('head')[0].appendChild(cwjs);
+  })(document);
+</script>
+
 </head>
 <body>
   <div class="navbar navbar-fixed-top">
@@ -55,14 +65,15 @@
 		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
           </form>
-	</td>
+	  <div id="chatwing-button-76d898a5-08ba-4245-9638-7ffbd03e5b23"></div>
+        </td>	
 	</tr>
 	</table>
       </div>
     </div>
   </div>
 
-<script src="http://repository.chatwee.com/scripts/f7ee414474fe3aa5eb9a90c03ac15616.js" type="text/javascript" charset="UTF-8"></script>
+<!--script src="http://repository.chatwee.com/scripts/f7ee414474fe3aa5eb9a90c03ac15616.js" type="text/javascript" charset="UTF-8"></script-->
 
 </body>
 </html>
