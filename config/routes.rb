@@ -1,4 +1,6 @@
 Btfdtv::Application.routes.draw do
+  resources :contributors
+
   resources :streams
 
   resources :products

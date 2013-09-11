@@ -1,0 +1,62 @@
+<%= form_for @contributor, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :twitter, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :twitter, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :stocktwits, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :stocktwits, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :facebook, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :facebook, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :site, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :site, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :short_bio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :short_bio, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :full_bio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :full_bio, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :featured, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :featured, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                contributors_path, :class => 'btn' %>
+  </div>
+<% end %>
