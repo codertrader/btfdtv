@@ -1,8 +1,20 @@
 Btfdtv::Application.routes.draw do
+  
+  #sorcery authentication
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login"  => "sessions#new",     :as => "login"
+  get "signup" => "users#new",        :as => "signup"
+  resources :users
+  resources :sessions
+  #end sorcery authentication
+
+  # individuals who are hosts, guests or bloggers
   resources :contributors
 
+  # resources for streaming content
   resources :streams
 
+  # stuff that BTFDtv sells for making money
   resources :products
 
   # The priority is based upon order of creation: first created -> highest priority.

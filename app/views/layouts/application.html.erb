@@ -32,7 +32,16 @@
         <a class="brand" href="/">BTFDtv</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Contact Us", "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li> 
+	    <li><%= link_to "Contributors", contributors_path %></li>
+            <li><%= link_to "Contact Us", "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
+	  </ul>
+	  <ul class="nav pull-right"> 
+            <% if current_user %>
+              <li><%= link_to "Log out", logout_path %></li>
+            <% else %>
+              <li><%= link_to "Sign up", signup_path %></li>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>   
 	  </ul>
         </div>
       </div>
@@ -40,12 +49,17 @@
   </div>
 
   <div class="container">
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id=>"flash_#{name}" %>
+    <% end %>
+    
     <div class="row">
       <div class="span8 text-left">
         <%= yield %> 
       </div>
       <div class="span4">
-       <div class="well inline" style="width:225px;">
+       <div class="well inline pull-right" style="width:225px;">
 	<h2>About BTFDtv</h2>
         <p class="muted"> 
 	<strong>BTFDtv</strong> has no producers, writers, editors or on air rules. 

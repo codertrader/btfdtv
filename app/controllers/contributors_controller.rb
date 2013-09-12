@@ -1,6 +1,8 @@
 class ContributorsController < ApplicationController
   before_action :set_contributor, only: [:show, :edit, :update, :destroy]
 
+  before_action :require_login, except: [:index]
+
   # GET /contributors
   # GET /contributors.json
   def index
