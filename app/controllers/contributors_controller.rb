@@ -2,6 +2,7 @@ class ContributorsController < ApplicationController
   before_action :set_contributor, only: [:show, :edit, :update, :destroy]
 
   before_action :require_login, except: [:index]
+  before_action :check_admin, except: [:index]
 
   # GET /contributors
   # GET /contributors.json
@@ -72,5 +73,12 @@ class ContributorsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contributor_params
       params.require(:contributor).permit(:name, :email, :twitter, :stocktwits, :facebook, :short_bio, :full_bio, :featured, :site)
+    end
+
+    def check_admin
+	unless current_user.admin
+	  flash[:error] = "Admin access required." 
+          redirect_to contributors_path
+	end
     end
 end
