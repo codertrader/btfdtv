@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to login_url, :alert => "Login to access this page."
   end
+
+  def check_admin
+      unless current_user.admin
+        flash[:error] = "Admin access required."
+        redirect_to contributors_path
+      end
+  end
 end
