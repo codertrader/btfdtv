@@ -22,7 +22,7 @@
         <td><%= contributor.name %></td>
         <td><%= link_to(contributor.twitter, "http://www.twitter.com/#{contributor.twitter}", :target=>'blank') %></td>
         <td><%= link_to(contributor.stocktwits, "http://www.stocktwits.com/#{contributor.stocktwits}", :target=>'blank') %></td>
-        <td><%= link_to('Site', "#{contributor.site}", :target=>'blank') %></td>
+        <td><%= link_to('Site', "#{contributor.site}", {:target=>'blank'}) if contributor.site && !contributor.site.empty? %></td>
       <% if current_user_is_admin %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
