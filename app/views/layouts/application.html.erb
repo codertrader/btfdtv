@@ -34,6 +34,7 @@
           <ul class="nav">
 	    <li><%= link_to "Contributors", contributors_path %></li>
             <li><%= link_to "Contact Us", "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
+            <li><%= link_to "Disclaimers", disclaimers_path %></li>
 	  </ul>
 	  <ul class="nav pull-right"> 
             <% if current_user %>
@@ -92,6 +93,19 @@
       </div>
     </div>
   </div>
+
+ <!--div class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+      <div class="container">
+          <ul class="nav">
+          </ul>
+          <ul class="nav pull-right">
+            <li><%= link_to "Disclaimers", disclaimers_path %></li>
+          </ul>
+      </div>
+    </div>
+  </div-->
+
 
 <!--script src="http://repository.chatwee.com/scripts/f7ee414474fe3aa5eb9a90c03ac15616.js" type="text/javascript" charset="UTF-8"></script-->
 </body>

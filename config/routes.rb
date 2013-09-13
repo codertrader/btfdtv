@@ -1,5 +1,7 @@
 Btfdtv::Application.routes.draw do
   
+  resources :disclaimers
+
   #sorcery authentication
   get "logout" => "sessions#destroy", :as => "logout"
   get "login"  => "sessions#new",     :as => "login"
