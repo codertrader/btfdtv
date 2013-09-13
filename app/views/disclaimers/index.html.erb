@@ -7,7 +7,9 @@
     <tr>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:disclaimer) %></th>
+      <% if current_user_is_admin %>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +17,7 @@
       <tr>
         <td><%= disclaimer.description %></td>
         <td><%= disclaimer.disclaimer %></td>
+      <% if current_user_is_admin %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_disclaimer_path(disclaimer), :class => 'btn btn-mini' %>
@@ -24,11 +27,14 @@
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
         </td>
+     <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+      <% if current_user_is_admin %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_disclaimer_path,
             :class => 'btn btn-primary' %>
+      <% end %>

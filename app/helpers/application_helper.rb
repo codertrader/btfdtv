@@ -14,4 +14,8 @@ module ApplicationHelper
     end
   end
 
+  def current_user_is_admin
+    current_user && current_user.admin == 1
+  end
+
 end
