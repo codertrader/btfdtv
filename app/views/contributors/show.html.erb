@@ -17,9 +17,9 @@
   <dt><strong><%= model_class.human_attribute_name(:site) %>:</strong></dt>
   <dd><%= @contributor.site %></dd><br/>
   <dt><strong><%= model_class.human_attribute_name(:short_bio) %>:</strong></dt>
-  <dd><pre><%= @contributor.short_bio %></pre></dd>
+  <dd><%= simple_format @contributor.short_bio %></dd>
   <dt><strong><%= model_class.human_attribute_name(:full_bio) %>:</strong></dt>
-  <dd><pre><%= @contributor.full_bio %></pre></dd>
+  <dd><%= simple_format @contributor.full_bio %></dd>
   <dt><strong><%= model_class.human_attribute_name(:featured) %>:</strong></dt>
   <dd><%= @contributor.featured %></dd>
 </dl>
