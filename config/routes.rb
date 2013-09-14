@@ -1,5 +1,7 @@
 Btfdtv::Application.routes.draw do
   
+  get "schedules/index"
+  resources :schedules 
   resources :disclaimers
 
   #sorcery authentication
