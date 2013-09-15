@@ -1,8 +1,8 @@
 class ContributorsController < ApplicationController
   before_action :set_contributor, only: [:show, :edit, :update, :destroy]
 
-  before_action :require_login, except: [:index]
-  before_action :check_admin, except: [:index]
+  before_action :require_login, except: [:index,:show]
+  before_action :check_admin, except: [:index,:show]
 
   # GET /contributors
   # GET /contributors.json
