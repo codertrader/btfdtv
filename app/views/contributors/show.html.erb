@@ -1,9 +1,13 @@
 <%- model_class = Contributor -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h2><%=t '.title', :default => model_class.model_name.human.titleize %>&nbsp;<small>One of Our Greatest Assets</small></h2>
 </div>
 
-<dl class="dl-horizontal">
+<div class="span12">
+
+<%= image_tag(avatar_url(@contributor,200)) %>
+
+<dl class="dl-horizontal pull-left">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @contributor.name %></dd><br/>
   <dt><strong><%= model_class.human_attribute_name(:twitter) %>:</strong></dt>
@@ -13,10 +17,15 @@
   <dt><strong><%= model_class.human_attribute_name(:facebook) %>:</strong></dt>
   <dd><%= @contributor.facebook %></dd><br/>
   <dt><strong><%= model_class.human_attribute_name(:site) %>:</strong></dt>
-  <dd><%= @contributor.site %></dd><br/>
+  <dd><%= @contributor.site %></dd><br/><br/>
   <dt><strong><%= model_class.human_attribute_name(:full_bio) %>:</strong></dt>
   <dd><%= simple_format @contributor.full_bio %></dd><br/>
 </dl>
+<br/><br/>
+
+</div>
+
+<div class="clear-fix"></div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
@@ -31,3 +40,5 @@
               :class => 'btn btn-danger' %>
 <% end %>
 </div>
+
+
