@@ -32,15 +32,17 @@
         <a class="brand" href="/">BTFDtv</a>
         <div class="nav-collapse">
           <ul class="nav">
+            <li class="divider-vertical"></li>
 	    <li><%= link_to "Contributors", contributors_path %></li>
             <li><%= link_to "Tweet Shows", schedules_path %></li>
-            <li><%= link_to "Contact Us", "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
             <li><%= link_to "Disclaimers", disclaimers_path %></li>
+            <li><%= link_to "Contact Us", "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
 	  </ul>
 	  <ul class="nav pull-right"> 
             <% if current_user %>
               <li><%= link_to "Log out", logout_path %></li>
             <% else %>
+              <li class="divider-vertical"></li>
               <li><%= link_to "Sign up", signup_path %></li>
               <li><%= link_to "Log in", login_path %></li>
             <% end %>   
