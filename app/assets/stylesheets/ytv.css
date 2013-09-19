@@ -11,6 +11,8 @@
 	overflow: hidden;
 	font-family: arial, sans-serif;
 	height: 400px;
+	max-width: 800px;
+	margin: auto;
 	}
 .ytv-canvas ::-webkit-scrollbar{
 	border-left: 1px solid #000;
