@@ -7,7 +7,7 @@ class DisclaimersController < ApplicationController
   # GET /disclaimers
   # GET /disclaimers.json
   def index
-    @disclaimers = Disclaimer.all
+    @disclaimers = Disclaimer.all.order(:id)
   end
 
   # GET /disclaimers/1
