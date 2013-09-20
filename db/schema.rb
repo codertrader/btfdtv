@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130913141115) do
+ActiveRecord::Schema.define(version: 20130920162045) do
 
   create_table "contributors", force: true do |t|
     t.string   "name"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20130913141115) do
   create_table "disclaimers", force: true do |t|
     t.string   "description"
     t.text     "disclaimer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "editorials", force: true do |t|
+    t.text     "entry"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

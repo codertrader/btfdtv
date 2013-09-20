@@ -1,5 +1,8 @@
 Btfdtv::Application.routes.draw do
-  
+
+  get "editorials/index"  
+  resources :editorials
+
   get "schedules/index"
   resources :schedules 
   resources :disclaimers
