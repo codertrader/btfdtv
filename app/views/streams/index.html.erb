@@ -42,6 +42,9 @@ body {background-color: grey;}
   		  $(this).tab('show');
  		});
 
+		
+    		$('#live-youtube').youTubeChannel({user:'<%= Stream.first.name %>'});
+
 		$('#youtube-tv-frame').ytv({
                                   user: '<%= Stream.first.name %>',
                                   accent: '#d51c18',
@@ -188,7 +191,4 @@ body {background-color: grey;}
     
 })();
         
-$(function() {
-    $('#live-youtube').youTubeChannel({user:'<%= Stream.first.name %>'});
-});
 </script>
