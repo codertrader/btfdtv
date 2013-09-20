@@ -28,7 +28,7 @@
 .ytv-video{
 	position: absolute;
 	top: 0;
-    right: 250px;
+    right: 225px;
     bottom: 0;
     left: 0;
     height: 100%;
@@ -50,7 +50,7 @@
     right: 0;
     bottom: 0;
     height: 100%;
-    width: 250px;
+    width: 225px;
 	}
 	.ytv-list-inner{
 		overflow: auto;
@@ -82,7 +82,7 @@
 			border-left: 2px solid transparent;
 			}
 			.ytv-list a b{		
-			    max-height: 45px;
+			    max-height: 60px;
 			    overflow: hidden;
 			    display: block;
 			    text-overflow: ellipsis;

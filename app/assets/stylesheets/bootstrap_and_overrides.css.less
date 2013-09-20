@@ -14,8 +14,18 @@ body { padding-top: 60px; }
 @btnPrimaryBackground: @linkColor;
 //@wellBackground: #e3dadb;
 
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
+  background-color: #2c73ba; //#402B5C;
+  color: white;
+}
+
 .navbar .nav > li > a {
   padding: 10px 10px;
+}
+
+.nav-pills.nav-stacked > li > a {
+    margin-bottom: 3px;
+    text-align: center;
 }
 
 .navbar .brand {
