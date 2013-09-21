@@ -1,0 +1,31 @@
+<h1>Listing accouncements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accouncements.each do |accouncement| %>
+      <tr>
+        <td><%= accouncement.message %></td>
+        <td><%= accouncement.starts_at %></td>
+        <td><%= accouncement.ends_at %></td>
+        <td><%= link_to 'Show', accouncement %></td>
+        <td><%= link_to 'Edit', edit_accouncement_path(accouncement) %></td>
+        <td><%= link_to 'Destroy', accouncement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Accouncement', new_accouncement_path %>

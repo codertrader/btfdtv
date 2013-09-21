@@ -1,5 +1,8 @@
 Btfdtv::Application.routes.draw do
 
+  get 'announcements/:id/hide' =>  'announcements#hide', as: 'hide_announcement'
+  resources :announcements
+
   get "editorials/index"  
   resources :editorials
 

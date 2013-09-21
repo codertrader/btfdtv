@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @accouncement.message %>
+</p>
+
+<p>
+  <strong>Starts at:</strong>
+  <%= @accouncement.starts_at %>
+</p>
+
+<p>
+  <strong>Ends at:</strong>
+  <%= @accouncement.ends_at %>
+</p>
+
+<%= link_to 'Edit', edit_accouncement_path(@accouncement) %> |
+<%= link_to 'Back', accouncements_path %>

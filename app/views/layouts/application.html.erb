@@ -25,6 +25,7 @@
 
 </head>
 <body>
+
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -55,6 +56,13 @@
         </div>
       </div>
     </div>
+
+  <% Announcement.current(cookies.signed[:hidden_announcement_ids]).each do |announcement| %>
+    <%= div_for announcement, :class=>"extendfull" do %>
+      <%= announcement.message %>
+      <%= link_to "Hide Announcement", hide_announcement_path(announcement), remote: true %>
+    <% end %>
+  <% end %>
   </div>
 
   <div class="container-fluid">
