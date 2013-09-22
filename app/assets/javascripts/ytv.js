@@ -220,7 +220,9 @@
                                     if( video.title.indexOf('test') > -1 || video.title.indexOf('Test') > -1 || video.title == 'BTFDtv' || video.title.indexOf('Dark') > -1 ) {
 				       continue;
 				    }
-   
+  
+				    if( video.duration == 0 ) { continue; }
+ 
                                     var date = new Date(null);
                                     date.setSeconds(video.duration);
                                     var timeSlots = (date.toTimeString().substr(0, 8)).split(':'),

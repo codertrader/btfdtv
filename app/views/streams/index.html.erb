@@ -28,7 +28,7 @@ body {background-color: black;}
 
   <ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="myTab" >
     <li class="active"><a href="#live" data-toggle="pill">LIVE</a></li>
-    <li><a href="#archive" data-toggle="pill">Archive</a></li>
+    <li><a href="#archive" data-toggle="pill" id="archive-link">Archive</a></li>
   </ul>
 
 <div class="tab-content">
@@ -60,14 +60,16 @@ body {background-color: black;}
 		
     		$('#live-youtube').youTubeChannel({user:'<%= Stream.first.name %>'});
 
-		$('#youtube-tv-frame').ytv({
+		$('#archive-link').click( function() {	
+			$('#youtube-tv-frame').ytv({
                                   user: '<%= Stream.first.name %>',
                                   accent: '#d51c18',
                                   autoplay: false,
                                   chainVideos: true,
                                 });
 
-                });
+                	});
+		});
 
 </script>
 
