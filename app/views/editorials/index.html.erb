@@ -1,1 +1,40 @@
-<iframe seamless height="550" width="100%" src="https://docs.google.com/document/d/1WsYZvbkzyqfRLYbk_KUXpHE-N9DSnsnAkU4YcxFd62o/pub"></iframe>
+<div class="span12 pull-center">
+
+  <ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="myTab" >
+    <li class="active"><a href="#hosts" data-toggle="pill">Hosts</a></li>
+    <li><a href="#guests" data-toggle="pill" id="guests-link">Guests</a></li>
+    <li><a href="#visitors" data-toggle="pill" id="visitors-link">Visitors</a></li>
+  </ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="hosts">
+    <iframe seamless height="550" width="100%" src="https://docs.google.com/document/d/1WsYZvbkzyqfRLYbk_KUXpHE-N9DSnsnAkU4YcxFd62o/pub"></iframe>
+  </div>
+
+  <div class="tab-pane" id="guests">
+    <iframe seamless height="550" width="100%" src="https://docs.google.com/document/d/10PIGrAi43bPZZjksNzOK-_hrRu3w5pZB8i124GJllV4/pub"></iframe>
+  </div>
+  
+  <div class="tab-pane" id="visitors">
+    <iframe seamless height="550" width="100%" src="https://docs.google.com/document/d/1mFOMfF8zU5Njpq8jnG2RXhLYYVOrljsjD6W1RbA2BMM/pub"><</iframe>
+  </div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+     $(document).ready( function() {
+
+                $(function () {
+                  $('#myTab a:first').tab('show')
+                });
+
+                $('#myTab a').click(function (e) {
+                  e.preventDefault();
+                  $(this).tab('show');
+                });
+
+     }
+</script>
+
