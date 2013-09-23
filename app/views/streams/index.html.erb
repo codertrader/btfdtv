@@ -68,7 +68,7 @@ body {background-color: black;}
 
                 	});
 
-    		$('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', loaded: function(videos,allopts) { if(videos.length==0) { $('#archive-link').trigger('click'); } } });
+    		$('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', autoplay: true, loaded: function(videos,allopts) { if(videos.length==0) { $('#archive-link').trigger('click'); } } });
 	});
 </script>
 
@@ -168,7 +168,7 @@ body {background-color: black;}
     }
     
     var defoptions = {
-        autoplay: false,
+        autoplay: true,
         user: null,
         carousel: function(){}, //createCarousel,
         player: createPlayer,
@@ -198,10 +198,17 @@ body {background-color: black;}
                 var entries = feed.entry || [];
                 var videos = [];
 
-                $.each(entries, function(i, entry) {
+               // $.each(entries, function(i, entry) {
+		   for( var i = 0; i < entries.length; i++ ) {
+                    var entry = entries[i];
+
+			 var href = entry.link[1].href;
+            		var slug= href.substr( href.indexOf('videos/') + 7 );
+
+
                     var video = {
                         title: entry.title.$t,
-                        id: entry.id.$t.match('[^/]*$'),
+                        id: slug,
                         thumbnails: entry.media$group.media$thumbnail
                     };
 
@@ -210,7 +217,8 @@ body {background-color: black;}
                     } else {
                       videos.push(video);
                     }
-                });
+                //});
+	        }
 
                 allopts.allvideos = videos;
                 allopts.carousel(md, videos, allopts);
