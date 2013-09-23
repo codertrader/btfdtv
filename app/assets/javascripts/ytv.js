@@ -176,7 +176,7 @@
                 },
                 compileList: function(data){
                     if(data && data.feed){
-                        utils.ajax.get( utils.endpoints.userInfo(), function(userInfo){
+                        $.getJSON( utils.endpoints.userInfo(), function(userInfo){
                             var list = '',
                                 user = {
                                     title: userInfo.entry.title.$t,
@@ -247,7 +247,7 @@
                             action.logic.loadVideo(first, settings.autoplay);
                             
                             if(settings.browsePlaylists){
-                                utils.ajax.get( utils.endpoints.userPlaylists(), prepare.playlists );
+                                $.getJSON( utils.endpoints.userPlaylists(), prepare.playlists );
                             }
                             
                         });
@@ -344,7 +344,7 @@
                             settings.playlist = target.dataset.ytvPlaylist;
                             target.children[1].innerHTML = 'Loading...';
                             
-                            utils.ajax.get( utils.endpoints.playlistVids(), function(res){
+                            $.getJSON( utils.endpoints.playlistVids(), function(res){
                                 var lh = doc.getElementsByClassName('ytv-list-header')[0];
                                 lh.className = lh.className.replace(' ytv-playlist-open', '');
                                 prepare.compileList(res);
@@ -353,7 +353,7 @@
                     }
                 },
                 loadAds: function(){
-                    utils.ajax.get( utils.endpoints.adPlaylist(), function(data){
+                    $.getJSON( utils.endpoints.adPlaylist(), function(data){
                         var videos = data.feed.entry,
                             i;
                         cache.ads = [];
@@ -382,7 +382,7 @@
                     prepare.youtube(function(){
                         prepare.build();
                         action.bindEvents();
-                        utils.ajax.get( settings.playlist ? utils.endpoints.playlistVids() : utils.endpoints.userVids(), prepare.compileList );
+                        $.getJSON( settings.playlist ? utils.endpoints.playlistVids() : utils.endpoints.userVids(), prepare.compileList );
                     });
                 }
             };
