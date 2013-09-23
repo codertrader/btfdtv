@@ -14,6 +14,11 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+
+$.ajaxSetup({
+  timeout: 0
+});
+
   (function(d) {
     var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
     cwjs = d.createElement('script'); cwjs.type = 'text/javascript'; cwjs.async = true; cwjs.id = id

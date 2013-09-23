@@ -110,13 +110,13 @@
                         return utils.endpoints.base+'feeds/api/users/'+settings.user+'?v=2&alt=json';
                     },
                     userVids: function(){
-                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&format=5&max-results=50';
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&format=5&max-results=25';
                     },
                     userPlaylists: function(){
-                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=50';
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=25';
                     },
                     playlistVids: function(){
-                        return utils.endpoints.base+'feeds/api/playlists/'+(settings.playlist)+'?v=2&alt=json&format=5&max-results=50';
+                        return utils.endpoints.base+'feeds/api/playlists/'+(settings.playlist)+'?v=2&alt=json&format=5&max-results=25';
                     }
                 },
                 deepExtend: function(destination, source) {
@@ -236,7 +236,7 @@
                                     
                                     list += '<li'+isFirst+'><a href="#" data-ytv="'+(video.slug)+'" class="ytv-clear">';
                                     list += '<div class="ytv-thumb"><div class="ytv-thumb-stroke"></div><span>'+(time)+'</span><img src="'+(video.thumb)+'"></div>';
-                                    list += '<div class="ytv-content"><b>'+(video.title)+'</div>';
+                                    list += '<div class="ytv-content"><b>'+(video.title)+'</b></div>';
                                     //list += '</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span></div>';
                                     list += '</a></li>';
                                 }

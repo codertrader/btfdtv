@@ -58,11 +58,12 @@ body {background-color: black;}
  		});
 
 		$('#archive-link').click( function() {	
+
 				$('#youtube-tv-frame').ytv({
                                   user: '<%= Stream.first.name %>',
                                   accent: '#d51c18',
-                                  autoplay: false,
-                                  chainVideos: true,
+                                  autoplay: true,
+                                  chainVideos: 1,
                                 });
 
                 	});
