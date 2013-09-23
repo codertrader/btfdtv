@@ -107,16 +107,16 @@
                 endpoints: {
                     base: 'http://gdata.youtube.com/',
                     userInfo: function(){
-                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'?v=2&alt=json';
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'?v=2&alt=json&extra=' + Math.random();
                     },
                     userVids: function(){
-                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&format=5&max-results=25';
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&format=5&max-results=25&extra=' + Math.random();
                     },
                     userPlaylists: function(){
-                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=25';
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=25&extra=' + Math.random();
                     },
                     playlistVids: function(){
-                        return utils.endpoints.base+'feeds/api/playlists/'+(settings.playlist)+'?v=2&alt=json&format=5&max-results=25';
+                        return utils.endpoints.base+'feeds/api/playlists/'+(settings.playlist)+'?v=2&alt=json&format=5&max-results=25&extra=' + Math.random();
                     }
                 },
                 deepExtend: function(destination, source) {
