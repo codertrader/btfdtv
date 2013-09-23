@@ -57,7 +57,6 @@ body {background-color: black;}
   		  $(this).tab('show');
  		});
 
-		
 		$('#archive-link').click( function() {	
 				$('#youtube-tv-frame').ytv({
                                   user: '<%= Stream.first.name %>',
@@ -134,7 +133,7 @@ body {background-color: black;}
         }
         ifr.attr('src', src);
      } else {
-        ifr.attr('src','assets/noliveshow.jpg'); // Image Source is techinasia 
+        //ifr.attr('src','assets/noliveshow.jpg'); // Image Source is techinasia 
      }
         jqe.append(ifr);
     }
