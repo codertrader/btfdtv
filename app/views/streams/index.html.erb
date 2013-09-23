@@ -67,7 +67,7 @@ body {background-color: black;}
 
                 	});
 
-    		$('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', loaded: function(videos,allopts) { if(videos.length==0) { /*$('#archive-link').trigger('click');*/ } } });
+    		$('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', loaded: function(videos,allopts) { if(videos.length==0) { $('#archive-link').trigger('click'); } } });
 	});
 </script>
 
