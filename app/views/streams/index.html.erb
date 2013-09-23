@@ -204,7 +204,7 @@ body {background-color: black;}
 
 			 var href = entry.link[1].href;
             		var slug= href.substr( href.indexOf('videos/') + 7 );
-
+                        slug = slug.substr( 0, slug.length - 4 ); 
 
                     var video = {
                         title: entry.title.$t,
