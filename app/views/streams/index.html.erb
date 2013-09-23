@@ -32,7 +32,7 @@ body {background-color: black;}
   </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="live">
+  <div class="tab-pane active" id="live" style="overflow:hidden;">
     <div id="live-youtube" class="span12" style="margin:auto; max-width: 720px; width:100%; height:400px; max-height:400px; overflow:hidden;">
     </div> 
   </div>
@@ -58,10 +58,8 @@ body {background-color: black;}
  		});
 
 		
-    		$('#live-youtube').youTubeChannel({user:'<%= Stream.first.name %>'});
-
 		$('#archive-link').click( function() {	
-			$('#youtube-tv-frame').ytv({
+				$('#youtube-tv-frame').ytv({
                                   user: '<%= Stream.first.name %>',
                                   accent: '#d51c18',
                                   autoplay: false,
@@ -69,8 +67,9 @@ body {background-color: black;}
                                 });
 
                 	});
-		});
 
+    		$('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', loaded: function(videos,allopts) { if(videos.length==0) { /*$('#archive-link').trigger('click');*/ } } });
+	});
 </script>
 
 <style type="text/css">
@@ -83,7 +82,8 @@ body {background-color: black;}
     overflow: hidden;
     background: white;
     position: absolute;
-    border: solid 0px gray;
+    //border: solid 0px gray;
+    border: none;
 }
 
 .youtube .xcarousel {
@@ -104,8 +104,8 @@ body {background-color: black;}
 .youtube iframe.player {
     width: 100%;
     height: 100%;
-    overflow: auto;
-    border: 0;
+    overflow: hidden;//auto
+    border: none !important;
 }
 
 -->
@@ -118,8 +118,13 @@ body {background-color: black;}
         if (ifr.length === 0) {
             ifr = $('<iframe scrolling="no">');
             ifr.addClass('player');
+	    ifr.css('border','none');
         }
-        var src = 'http://www.youtube.com/embed/' + video.id;
+
+     var src = '';
+
+     if( video ) {
+        src = 'http://www.youtube.com/embed/' + video.id;
         if (options.playopts) {
             src += '?';
             for (var k in options.playopts) {
@@ -128,6 +133,9 @@ body {background-color: black;}
             src += '_a=b';
         }
         ifr.attr('src', src);
+     } else {
+        ifr.attr('src','assets/noliveshow.jpg'); // Image Source is techinasia 
+     }
         jqe.append(ifr);
     }
     
@@ -174,7 +182,43 @@ body {background-color: black;}
         }
     };
     
-    
+ $.fn.extend({
+        youTubeLiveEvent: function(options) {
+            var md = $(this);
+            md.addClass('youtube');
+            md.addClass('youtube-channel');
+            var allopts = $.extend(true, {}, defoptions, options);
+            allopts.maindiv = md;
+
+            var url = "https://gdata.youtube.com/feeds/api/users/" + allopts.user + "/live/events?v=2&inline=true&alt=json&status=active";
+
+            $.getJSON(url, function(data) {
+                var feed = data.feed;
+                var entries = feed.entry || [];
+                var videos = [];
+
+                $.each(entries, function(i, entry) {
+                    var video = {
+                        title: entry.title.$t,
+                        id: entry.id.$t.match('[^/]*$'),
+                        thumbnails: entry.media$group.media$thumbnail
+                    };
+
+                    if( video.title.indexOf('test') > -1 || video.title.indexOf('Test') > -1 || video.title == 'BTFDtv' || video.title.indexOf('Dark') > -1 ) {
+                      // filter these test shows out
+                    } else {
+                      videos.push(video);
+                    }
+                });
+
+                allopts.allvideos = videos;
+                allopts.carousel(md, videos, allopts);
+                allopts.player(md, videos[0], allopts);
+                allopts.loaded(videos, allopts);
+            });
+        }
+    });
+ 
     $.fn.extend({
         youTubeChannel: function(options) {
             var md = $(this);
