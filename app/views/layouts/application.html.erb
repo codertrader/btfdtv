@@ -24,6 +24,7 @@
   });
 
   // add an event listener to a Chooser button
+ if( document.getElementById("file-chooser") ) {
     document.getElementById("file-chooser").addEventListener("DbxChooserSuccess",
         function(e) {
             for( var i = 0; i < e.files.length; ++i ) {
@@ -38,7 +39,7 @@
         function(e) {
             // for testing: alert("File Chooser Canceled.");
         }, false);
-
+}
 
     function submitWithAjax(file) {
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>; 
