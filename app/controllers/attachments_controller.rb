@@ -3,9 +3,9 @@ class AttachmentsController < ApplicationController
 
   # GET /attachments
   # GET /attachments.json
-  def index
-    @attachments = Attachment.all
-  end
+#  def index
+#    @attachments = Attachment.all
+#  end
 
   # GET /attachments/1
   # GET /attachments/1.json
@@ -75,4 +75,9 @@ class AttachmentsController < ApplicationController
     def attachment_params
        require(:attachment).permit(:stream_id, :name, :link, :bytes, :icon, :thumbnails_64x64, :thumbnails_200x200, :thumbnails_640x480)
     end
+
+    def update; end
+    def edit; end
+    def index; end
+    def destroy; end
 end

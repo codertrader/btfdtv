@@ -1,10 +1,14 @@
 class StreamsController < ApplicationController
   before_action :set_stream, only: [:show, :edit, :update, :destroy]
 
+  before_action :require_login, except: [:index,:show]
+  before_action :check_admin, except: [:index,:show]
+
   # GET /streams
   # GET /streams.json
   def index
     @streams = Stream.all
+    @stream = Stream.first
   end
 
   # GET /streams/1

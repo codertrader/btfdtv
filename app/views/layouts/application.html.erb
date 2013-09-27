@@ -41,7 +41,7 @@
 
 
     function submitWithAjax(file) {
-        var userId = <%unless current_user.nil?%><%= current_user.id %><%else%> -1 <%end%>; 
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>; 
 	var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
 	var data = {
 		    attachment: {stream_id:streamId, name:file.name, link:file.link, bytes:file.bytes, icon:file.icon, thumbnails_64x64:file.thumbnails['64x64']},
@@ -164,7 +164,7 @@
     <div class="tab-pane" id="attachments">
       <div id="attachments-well" class="attachments well">
 
-        <% if current_user %>	
+        <% if logged_in? %>	
 	<div id="dropbox">
           <form>
 	    <input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" data-extensions=".pdf .doc .docx .png .jpg .gif" style="visibility: hidden;"/>
@@ -179,9 +179,9 @@
         <% else %>
         <% end %>
         <div id="attachments-recent">
-	<% @stream.attachments.each do |attachment| %>
-          <div class="row">
-            <a href='<%=attachment.link%>' target='blank'><img src='<%=attachment.thumbnails_64x64 or attachment.icon%>'><%=attachment.name%></a>
+	<% @stream.attachments.order(:created_at).reverse_order.limit(10).each do |attachment| %>
+          <div class="row attachment" style="margin-left:.25em;">
+            <a href='<%=attachment.link%>' target='blank'><img src='<%=attachment.thumbnails_64x64 or attachment.icon%>' height='32px' width='32px'>&nbsp;<%=attachment.name%></a><br/>
           </div>
         <% end %>
         </div>
