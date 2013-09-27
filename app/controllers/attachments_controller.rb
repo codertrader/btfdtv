@@ -25,7 +25,7 @@ class AttachmentsController < ApplicationController
   # POST /attachments.json
   def create
     a = params[:attachment]
-    @attachment = Attachment.new({:stream_id=>a[:stream_id],:name=>a[:name],:link=>a[:link],:bytes=>a[:bytes],:icon=>a[:icon]})
+    @attachment = Attachment.new({:stream_id=>a[:stream_id],:name=>a[:name],:link=>a[:link],:bytes=>a[:bytes],:icon=>a[:icon],:thumbnails_64x64=>a[:thumbnails_64x64]})
 
     respond_to do |format|
       if @attachment.save

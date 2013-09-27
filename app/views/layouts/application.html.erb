@@ -9,6 +9,10 @@
   <%= stylesheet_link_tag    "ytv", :media => "all"  %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "ytv" %>
+
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="rrxsieen8kpvfcg"></script>
+
+
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,31 +21,34 @@
 
   $.ajaxSetup({
     timeout: 0,
-    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript");}
   });
 
-    function submitWithAjax() {
+  // add an event listener to a Chooser button
+    document.getElementById("file-chooser").addEventListener("DbxChooserSuccess",
+        function(e) {
+            for( var i = 0; i < e.files.length; ++i ) {
+              var file = e.files[i];
+              submitWithAjax(file); 
+            }
 
-        var e = { "files": [ 
-                           {
-			    stream_id: 1,
-		            name: "filename.txt",
-    			    link: "https://...",
-    			    bytes: 464,
-          	            icon: "https://..." //,
-    			   /* "thumbnails": {
-        			"64x64": "https://...",
-        			"200x200": "https://...",
-        			"640x480": "https://..."} */
-			   }
-			  ]
-		};			   
-       
-          $.post( '<%=attachments_path%>', {attachment: e.files[0]}, null, "script");
+        }, false);
 
+
+    document.getElementById("file-chooser").addEventListener("DbxChooserCancel",
+        function(e) {
+            // for testing: alert("File Chooser Canceled.");
+        }, false);
+
+
+    function submitWithAjax(file) {
+        var userId = <%unless current_user.nil?%><%= current_user.id %><%else%> -1 <%end%>; 
+	var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+	var data = {
+		    attachment: {stream_id:streamId, name:file.name, link:file.link, bytes:file.bytes, icon:file.icon, thumbnails_64x64:file.thumbnails['64x64']},
+		    user: {id:userId} 
+		   };
+        $.post( '<%=attachments_path(:format=>'js')%>', data, null, "script");
     }
-
-   submitWithAjax();
 
   (function(d) {
     var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
@@ -96,9 +103,6 @@
   <% end %>
   </div>
 
-  <div id="attachments">
-  </div>
-
   <div class="container-fluid">
 
     <% flash.each do |key, value| %>
@@ -112,8 +116,18 @@
       <div class="span9 text-left">
         <%= yield %> 
       </div>
+      
       <div class="span3">
-       <div class="well" style="width:85%; margin-top:2.75em; margin-right:2em;">
+
+       <ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="myTab" >
+        <li class="active"><a href="#about" data-toggle="pill">About</a></li>
+        <% if @stream and @stream.attachments %><li><a href="#attachments" data-toggle="pill" id="attachments-link">Attachments</a></li><% end %>
+       </ul>
+
+    <div class="tab-content">
+     <div class="tab-pane active" id="about" style="overflow:hidden;">
+       
+       <div class="well" style="width:85%; margin-right:2em;">
 	<h2>BTFDtv</h2>
         <p class="muted"><%= glyph(:star) %> 
 	<strong>BTFDtv</strong> has no producers, writers, editors or on air rules. 
@@ -143,6 +157,38 @@
 	</tr>
 	</table>
        </div> 
+     
+    </div>
+
+    <% if @stream %> 
+    <div class="tab-pane" id="attachments">
+      <div id="attachments-well" class="attachments well">
+
+        <% if current_user %>	
+	<div id="dropbox">
+          <form>
+	    <input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" data-extensions=".pdf .doc .docx .png .jpg .gif" style="visibility: hidden;"/>
+          </form>
+        </div>
+        <% else %>
+	  <p class="text-error"><strong><%= link_to 'Log in', login_path %> to share attachments.</strong></p>
+        <% end %>
+
+        <% if @stream.attachments.empty? %>	
+	  <p class="text-info">No attachments found.</p>
+        <% else %>
+        <% end %>
+        <div id="attachments-recent">
+	<% @stream.attachments.each do |attachment| %>
+          <div class="row">
+            <a href='<%=attachment.link%>' target='blank'><img src='<%=attachment.thumbnails_64x64 or attachment.icon%>'><%=attachment.name%></a>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+ 
       </div>
     </div>
   </div>
