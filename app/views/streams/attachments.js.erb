@@ -1,0 +1,5 @@
+$("#attachments-recent").html('');
+
+<% @stream.attachments.order(:created_at).reverse_order.limit(10).each do |attachment| %>
+  $("#attachments-recent").append("<%= escape_javascript(render(:partial => attachment)) %>");
+<% end %>

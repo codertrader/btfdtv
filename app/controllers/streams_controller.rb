@@ -1,8 +1,14 @@
 class StreamsController < ApplicationController
-  before_action :set_stream, only: [:show, :edit, :update, :destroy]
+  before_action :set_stream, only: [:show, :edit, :update, :destroy, :attachments]
 
   before_action :require_login, except: [:index,:show]
   before_action :check_admin, except: [:index,:show]
+
+  def attachments
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # GET /streams
   # GET /streams.json
