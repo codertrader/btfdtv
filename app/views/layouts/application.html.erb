@@ -130,7 +130,7 @@
      <div class="tab-pane active" id="about" style="overflow:hidden;">
        
        <div class="well" style="width:85%; margin-right:2em;">
-	<h2>BTFDtv</h2>
+	<h3>BTFDtv</h3>
         <p class="muted"><%= glyph(:star) %> 
 	<strong>BTFDtv</strong> has no producers, writers, editors or on air rules. 
        	</p> 
@@ -165,7 +165,7 @@
     <% if @stream %> 
     <div class="tab-pane" id="attachments">
       <div id="attachments-well" class="attachments well">
-
+        <h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream)%>" data-remote="true" class="btn"><%=glyph(:refresh)%></a></h3> 
         <% if logged_in? %>	
 	<div id="dropbox">
           <form>
@@ -178,6 +178,7 @@
 
         <% if @stream.attachments.empty? %>	
 	  <p class="text-info">No attachments found.</p>
+          <div class="row attachment"></div>
         <% else %>
         <% end %>
         <div id="attachments-recent">
