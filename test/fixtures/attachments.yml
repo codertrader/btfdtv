@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stream_id: 1
+  name: MyString
+  link: MyString
+  bytes: 1
+  icon: MyString
+  thumbnails_64x64: MyString
+  thumbnails_200x200: MyString
+  thumbnails_640x480: MyString
+
+two:
+  stream_id: 1
+  name: MyString
+  link: MyString
+  bytes: 1
+  icon: MyString
+  thumbnails_64x64: MyString
+  thumbnails_200x200: MyString
+  thumbnails_640x480: MyString

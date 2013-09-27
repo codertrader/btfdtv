@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+<head>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="rrxsieen8kpvfcg"></script>
+
+<script type="text/javascript">
+
+  $(document).ready( function() {
+
+    jQuery.ajaxSetup({ 
+      'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+    })
+
+    function submitWithAjax() {
+       $.submit( function() {
+	$.post( <%= attachments_path, e, null, "script");
+        return false;
+       } 
+    }
+
+    // add an event listener to a Chooser button
+    document.getElementById("file-chooser").addEventListener("DbxChooserSuccess",
+        function(e) {
+	    for( var i = 0; i < e.files.length; ++i ) {
+	      var file = e.files[i];
+              alert("A chosen file: " + [file.link, file.name, file.bytes, file.icon, file.thumbnails['64x64'], file.thumbnails['200x200'], file.thumbnails['640x480']].join(':') );
+            }
+
+        }, false);
+
+
+    document.getElementById("file-chooser").addEventListener("DbxChooserCancel",
+        function(e) {
+            alert("File Choser Canceled.");
+        }, false);
+   });
+
+</script>
+
+</head>
+<body>
+  <div id="dropbox">
+     <form>
+	<input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" data-extensions=".pdf .doc .docx .png .jpg .gif" style="visibility: hidden;"/>
+     </form>
+  </div>
+</body>
+</html> 

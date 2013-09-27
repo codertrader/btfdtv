@@ -72,7 +72,7 @@ class ContributorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contributor_params
-      params.require(:contributor).permit(:name, :email, :twitter, :stocktwits, :facebook, :short_bio, :full_bio, :featured, :site)
+      params.require(:contributor).permit(:name, :email, :twitter, :stocktwits, :facebook, :short_bio, :full_bio, :featured, :site, :title, :activated)
     end
 
 end

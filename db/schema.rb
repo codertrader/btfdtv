@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921212643) do
+ActiveRecord::Schema.define(version: 20130926230739) do
 
   create_table "accouncements", force: true do |t|
     t.text     "message"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 20130921212643) do
     t.datetime "updated_at"
   end
 
+  create_table "attachments", force: true do |t|
+    t.integer  "stream_id"
+    t.string   "name"
+    t.string   "link"
+    t.integer  "bytes"
+    t.string   "icon"
+    t.string   "thumbnails_64x64"
+    t.string   "thumbnails_200x200"
+    t.string   "thumbnails_640x480"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "contributors", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -41,6 +54,8 @@ ActiveRecord::Schema.define(version: 20130921212643) do
     t.integer  "featured"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.integer  "activated"
   end
 
   create_table "disclaimers", force: true do |t|

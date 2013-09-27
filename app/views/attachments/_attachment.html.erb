@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stream:</strong>
+  <%= @attachment.stream_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @attachment.name %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @attachment.link %>
+</p>
+
+<p>
+  <strong>Bytes:</strong>
+  <%= @attachment.bytes %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @attachment.icon %>
+</p>
+
+<p>
+  <strong>Thumbnails 64x64:</strong>
+  <%= @attachment.thumbnails_64x64 %>
+</p>
+
+<p>
+  <strong>Thumbnails 200x200:</strong>
+  <%= @attachment.thumbnails_200x200 %>
+</p>
+
+<p>
+  <strong>Thumbnails 640x480:</strong>
+  <%= @attachment.thumbnails_640x480 %>
+</p>
+
+<%= link_to 'Edit', edit_attachment_path(@attachment) %> |
+<%= link_to 'Back', attachments_path %>

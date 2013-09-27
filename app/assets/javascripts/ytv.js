@@ -226,7 +226,7 @@
                                     var date = new Date(null);
                                     date.setSeconds(video.duration);
                                     var timeSlots = (date.toTimeString().substr(0, 8)).split(':'),
-                                        time = timeSlots[1] + ':' + timeSlots[2];
+                                        time = (timeSlots[0] || '') + timeSlots[1] + ':' + timeSlots[2];
                                     
                                     var isFirst = '';
                                     if(first===true){

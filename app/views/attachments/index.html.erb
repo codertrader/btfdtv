@@ -1,0 +1,41 @@
+<h1>Listing attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stream</th>
+      <th>Name</th>
+      <th>Link</th>
+      <th>Bytes</th>
+      <th>Icon</th>
+      <th>Thumbnails 64x64</th>
+      <th>Thumbnails 200x200</th>
+      <th>Thumbnails 640x480</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @attachments.each do |attachment| %>
+      <tr>
+        <td><%= attachment.stream_id %></td>
+        <td><%= attachment.name %></td>
+        <td><%= attachment.link %></td>
+        <td><%= attachment.bytes %></td>
+        <td><%= attachment.icon %></td>
+        <td><%= attachment.thumbnails_64x64 %></td>
+        <td><%= attachment.thumbnails_200x200 %></td>
+        <td><%= attachment.thumbnails_640x480 %></td>
+        <td><%= link_to 'Show', attachment %></td>
+        <td><%= link_to 'Edit', edit_attachment_path(attachment) %></td>
+        <td><%= link_to 'Destroy', attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Attachment', new_attachment_path %>

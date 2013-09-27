@@ -15,9 +15,33 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
-$.ajaxSetup({
-  timeout: 0
-});
+  $.ajaxSetup({
+    timeout: 0,
+    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript");}
+  });
+
+    function submitWithAjax() {
+
+        var e = { "files": [ 
+                           {
+			    stream_id: 1,
+		            name: "filename.txt",
+    			    link: "https://...",
+    			    bytes: 464,
+          	            icon: "https://..." //,
+    			   /* "thumbnails": {
+        			"64x64": "https://...",
+        			"200x200": "https://...",
+        			"640x480": "https://..."} */
+			   }
+			  ]
+		};			   
+       
+          $.post( '<%=attachments_path%>', {attachment: e.files[0]}, null, "script");
+
+    }
+
+   submitWithAjax();
 
   (function(d) {
     var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
@@ -25,7 +49,7 @@ $.ajaxSetup({
     cwjs.src = "//chatwing.com/code/76d898a5-08ba-4245-9638-7ffbd03e5b23/popout";
     d.getElementsByTagName('head')[0].appendChild(cwjs);
   })(document);
-  });
+});
 
 </script>
 
@@ -70,6 +94,9 @@ $.ajaxSetup({
       <%= link_to "Hide Announcement", hide_announcement_path(announcement), remote: true %>
     <% end %>
   <% end %>
+  </div>
+
+  <div id="attachments">
   </div>
 
   <div class="container-fluid">
