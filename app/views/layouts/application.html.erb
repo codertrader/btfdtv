@@ -12,6 +12,7 @@
 
   <script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="rrxsieen8kpvfcg"></script>
 
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
 
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -124,6 +125,10 @@
         <li class="active"><a href="#about" data-toggle="pill"><%=glyph(:home)%></a></li>
         <% if @stream and @stream.attachments %><li><a href="#attachments" data-toggle="pill" id="attachments-link"><%=glyph(:file)%></a></li><% end %>
         <li><a href="#twitter" data-toggle="pill"><%=glyph(:twitter)%></a></li>
+	<!--li>
+	  <script src="https://apis.google.com/js/plusone.js"></script>
+	  <div class="g-ytsubscribe" data-channel="BTFDtv" data-layout="default" data-theme="dark"></div>
+        </li-->
        </ul>
 
     <div class="tab-content">
