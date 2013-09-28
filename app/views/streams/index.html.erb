@@ -93,14 +93,16 @@ body {background-color: black;}
 								recentVideo = videos[0]; 
 							  }
 	        					  setTimeout(updateLiveEvent, 10000);
-							} 
+							},
+						     playopts: {vq:'hd720'} 
 						    });
 
 	        <% if params[:direct] %>		
     		$('#direct-youtube').youTubeDirect({user:'<%= Stream.first.name %>', 
 					             autoplay: <%= not params[:direct].nil? %>, 
 						     loaded: function(videos,allopts) { 
-							} 
+							},
+						     playopts: {vq:'hd720'} 
 						    });
 		<% end %>
 
