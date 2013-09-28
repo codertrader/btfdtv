@@ -72,16 +72,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="/">BTFDtv</a>
+        <a class="brand" href="/"><i class="icon-home"></i>BTFDtv</a>
         <div class="nav-collapse">
           <ul class="nav">
             <li class="divider-vertical"></li>
-	    <li><%= link_to "Chat", '#', :onclick => "$('#chatwing-button-76d898a5-08ba-4245-9638-7ffbd03e5b23 > input').trigger('click');" %></li>
-	    <li><%= link_to "Contributors", contributors_path %></li>
-            <li><%= link_to "Schedule", schedules_path %></li>
-            <li><%= link_to "Disclaimers", disclaimers_path %></li>
-	    <li><%= link_to "Editorials", editorials_path %></li>
-            <li><%= link_to "Contact Us", "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
+	    <li><%= link_to  raw('<i class="icon-comment"></i> Chat'), '#', :onclick => "$('#chatwing-button-76d898a5-08ba-4245-9638-7ffbd03e5b23 > input').trigger('click');" %></li>
+	    <li><%= link_to  raw('<i class="icon-user"></i> Contributors'), contributors_path %></li>
+            <li><%= link_to  raw('<i class="icon-calendar"></i> Schedule'), schedules_path %></li>
+            <li><%= link_to  raw('<i class="icon-list"></i> Disclaimers'), disclaimers_path %></li>
+	    <li><%= link_to  raw('<i class="icon-bullhorn"></i> Editorials'), editorials_path %></li>
+            <li><%= link_to  raw('<i class="icon-pencil"></i> Contact Us'), "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
 	  </ul>
 	  <ul class="nav pull-right"> 
             <% if current_user %>
