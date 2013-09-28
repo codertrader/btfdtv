@@ -36,6 +36,9 @@ Btfdtv::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+
+  get '/:direct' => 'streams#index', as: 'tiny_stream_direct'
+
   root 'streams#index'
 
   # Example of regular route:
