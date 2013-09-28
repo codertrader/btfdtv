@@ -29,6 +29,9 @@ body {background-color: black;}
   <ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="myTab" >
     <li class="active"><a href="#live" data-toggle="pill"><%=glyph(:microphone)%> LIVE</a></li>
     <li><a href="#archive" data-toggle="pill" id="archive-link"><%=glyph(:briefcase) %> Archive</a></li>
+    <% if params[:direct] %>
+      <li><a href="#direct" data-toggle="pill" id="direct-link"><%=glyph(:bookmark) %> Direct</a></li>
+    <% end %>
   </ul>
 
 <div class="tab-content">
@@ -39,6 +42,12 @@ body {background-color: black;}
   
   <div class="tab-pane" id="archive">
     <div id="youtube-tv-frame"><p class="text-info"><strong>Loading Archive...</strong></p></div>
+  </div>
+
+
+  <div class="tab-pane" id="direct" style="overflow:hidden;">
+    <div id="direct-youtube" class="span12" style="margin:auto; max-width: 720px; width:100%; height:400px; max-height:400px; overflow:hidden;">
+    </div> 
   </div>
 </div>
 
@@ -75,12 +84,25 @@ body {background-color: black;}
                     };
 
     		$('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', 
-					             autoplay: true, 
+					             autoplay: <%= params[:direct].nil? %>, 
 						     loaded: function(videos,allopts) { 
-							  if(videos.length==0) { $('#archive-link').trigger('click'); } else { recentVideo = videos[0]; }
+							  if(videos.length==0) { 
+							  	var alternateLink = '<%=params[:direct].nil? ? '#archive-link' : '#direct-link'%>'; 	
+								$(alternateLink).trigger('click'); 
+							  } else { 
+								recentVideo = videos[0]; 
+							  }
 	        					  setTimeout(updateLiveEvent, 10000);
 							} 
 						    });
+
+	        <% if params[:direct] %>		
+    		$('#direct-youtube').youTubeDirect({user:'<%= Stream.first.name %>', 
+					             autoplay: <%= not params[:direct].nil? %>, 
+						     loaded: function(videos,allopts) { 
+							} 
+						    });
+		<% end %>
 
 		function updateLiveEvent() {
 
@@ -277,6 +299,32 @@ body {background-color: black;}
             });
         }
     });
+
+ $.fn.extend({
+        youTubeDirect: function(options) {
+            var md = $(this);
+            md.addClass('youtube');
+            md.addClass('youtube-channel');
+            var allopts = $.extend(true, {}, defoptions, options);
+            allopts.maindiv = md;
+
+                var videos = [];
+
+                    var video = {
+                    //    title: entry.title.$t,
+                        id: '<%=params[:direct]%>',
+                    //    thumbnails: entry.media$group.media$thumbnail
+                    };
+
+                    videos.push(video);
+
+                allopts.allvideos = videos;
+                allopts.carousel(md, videos, allopts);
+                allopts.player(md, videos[0], allopts);
+                allopts.loaded(videos, allopts);
+        }
+    });
+
  
     $.fn.extend({
         youTubeChannel: function(options) {
