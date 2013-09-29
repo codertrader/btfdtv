@@ -1,0 +1,47 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <script type="application/javascript">
+
+var API_KEY = 'AIzaSyCRV03KpFosQojWCk0py-lcYTzrvrguiWE';
+
+googleApiClientReady = function() {
+  gapi.auth.init(function() {
+    window.setTimeout(checkAuth, 1);
+  });
+}
+
+function checkAuth() {
+  loadAPIClientInterfaces();
+}
+
+function loadAPIClientInterfaces() {
+  gapi.client.load('youtube', 'v3', function() {
+    handleAPILoaded();
+  });
+}
+
+// Once the api loads call a function to get the uploads playlist id.
+function handleAPILoaded() {
+  gapi.client.setApiKey(API_KEY);
+}
+
+/* example 
+        var requestOptions = {part:'status',id:item.contentDetails.videoId};	
+        var request = gapi.client.youtube.videos.list(requestOptions);
+        request.execute(function(videoResponse) {
+          if( videoResponse.items[0].status.uploadStatus != 'processed' ) {
+		alert('found deleted: ' + item.contentDetails.videoId);
+          } else {
+          	createDisplayThumbnail(item.snippet);
+	  }
+        });
+*/
+
+    </script>
+</head>
+<body>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+  </body>
+</html>
