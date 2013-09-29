@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :clear_cache
 
   def clear_cache
-    headers['Last-Modified'] = Time.now.httpdate 
+    # headers['Last-Modified'] = Time.now.httpdate 
   end
  
 
