@@ -199,7 +199,7 @@
                                 list += '</a>';
                             list += '</div>';
                             
-                            list += '<div class="ytv-list-inner"><ul>';
+                            list += '<div id="ytv-list-inner" class="ytv-list-inner"><ul></ul></div>';
 
                             var found = {};
                             var foundIds = "";
@@ -220,10 +220,6 @@
                                       video.stats = {viewCount: '0'};
                                     } 
                                     
-                                    if( video.title.indexOf('test') > -1 || video.title.indexOf('Test') > -1 || video.title == 'BTFDtv' || video.title.indexOf('Dark') > -1 ) {
-				       continue;
-				    }
- 				    
 				    found[video.slug] = video;
 				    foundIds += video.slug;
 				    foundIds += ','; 
@@ -231,6 +227,10 @@
                             }
 
 
+                            settings.element.innerHTML = '<div class="ytv-relative"><div class="ytv-video"><div id="ytv-video-player"></div></div><div class="ytv-list">'+list+'</div></div>';
+ 			
+			    var $ul = $("#ytv-list-inner > ul", settings.element);
+	    
 			     var requestOptions = {part:'id,contentDetails,status',
 						  id:foundIds};
 
@@ -239,33 +239,36 @@
 				    for( var v=0; v < videoResponse.items.length; v++ ) {
                                         if( videoResponse.items[v].status.uploadStatus == 'processed' ) {
 						var video = found[videoResponse.items[v].id];	
-                                               
-						/* 
+
+						var time = '';                                               
+					        if( video.duration != 0 ) {	
 						var date = new Date(null);
                                                 date.setHours(0);
                                                 date.setSeconds(video.duration);
                                                 var timeSlots = (date.toTimeString().substr(0, 8)).split(':'),
                                                 time = timeSlots[0] + ':' + timeSlots[1] + ':' + timeSlots[2];
-						*/
+						} else {
+						time = videoResponse.items[v].contentDetails.duration.replace("PT","").replace("H",":").replace("M",":").replace("S","");
+                                                } 
 
-						var time = videoResponse.items[v].contentDetails.duration.replace("PT","").replace("H",":").replace("M",":").replace("S","");
-                                                var isFirst = '';
+						var isFirst = '';
                                                 if(first===true){
                                                         isFirst = ' class="ytv-active"';
                                                         first = video.slug;
                                                 }
 
+						var list = '';
                                                 list += '<li'+isFirst+'><a href="#" data-ytv="'+(video.slug)+'" class="ytv-clear">';
                                                 list += '<div class="ytv-thumb"><div class="ytv-thumb-stroke"></div><span>'+(time)+'</span><img src="'+(video.thumb)+'"></div>';
                                                 list += '<div class="ytv-content"><b>'+(video.title)+'</b></div>';
                                                 //list += '</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span></div>';
                                                 list += '</a></li>';
+
+						var $li = $(list); 
+						$ul.append( $li );
                                         }
 				     }
 
-
-			    list += '</ul></div>';
-                            settings.element.innerHTML = '<div class="ytv-relative"><div class="ytv-video"><div id="ytv-video-player"></div></div><div class="ytv-list">'+list+'</div></div>';
 
                             action.logic.loadVideo(first, settings.autoplay);
 
