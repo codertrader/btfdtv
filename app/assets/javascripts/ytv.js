@@ -135,7 +135,7 @@
             prepare = {
                 youtube: function(fn){
                     var tag = doc.createElement('script');
-                    tag.src = "https://www.youtube.com/iframe_api";
+                    tag.src = "http://www.youtube.com/iframe_api";
                     var firstScriptTag = doc.getElementsByTagName('script')[0];
                     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
                     win.onYouTubeIframeAPIReady = fn;
