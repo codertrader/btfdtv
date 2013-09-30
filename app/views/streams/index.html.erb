@@ -348,7 +348,7 @@ body {background-color: black;}
   function updateLiveEvent() {
 
     var url = "http://gdata.youtube.com/feeds/api/users/" + '<%= Stream.first.name %>' + "/live/events?v=2&inline=true&alt=json&status=active";
-    var videos = [];
+    var xvideos = [];
     
     $.getJSON(url, 
 	      function(data) {
@@ -367,24 +367,19 @@ body {background-color: black;}
                     thumbnails: entry.media$group.media$thumbnail
                    };
 
-                   videos.push(video);
+                   xvideos.push(video);
                  }
 
-                 if( videos[0] && videos[0].id != recentVideo.id ) {
+                 if( xvideos[0] && xvideos[0].id != recentVideo.id ) {
                    location.reload();
-    		 } else if( !videos[0] ) {
+    		 } 
+                
+		 if( typeof xvideos[0] == 'undefined' || xvideos[0] == null) { 
                    $("#live-link").css('background-color','#CD332D');
                    $("#live-link").html('<%=glyph(:microphone)%> OFF AIR');
                  }
 
               });
-
-    if( videos[0] && videos[0].id != recentVideo.id ) {
-      location.reload();
-    } else if( !videos[0] ) {
-      $("#live-link").css('background-color','#CD332D');
-      $("#live-link").html('<%=glyph(:microphone)%> OFF AIR');
-    }
 
     setTimeout(updateLiveEvent, 10000);
   }
