@@ -57,6 +57,8 @@ body {background-color: black;}
 
   var API_KEY = 'AIzaSyCRV03KpFosQojWCk0py-lcYTzrvrguiWE';
 
+  var recentVideo = {title: 'OFF AIR', id: '', thumbnails: ''};
+
   googleApiClientReady = function() {
     gapi.auth.init(function() {
       window.setTimeout(checkAuth, 1);
@@ -101,8 +103,6 @@ body {background-color: black;}
          e.preventDefault();
   	 $(this).tab('show');
        });
-
-       var recentVideo = {title: 'OFF AIR', id: '', thumbnails: ''};
 
        $('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', 
 					    autoplay: <%= params[:direct].nil? %>, 
