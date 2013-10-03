@@ -58,5 +58,6 @@ gem 'twitter-bootstrap-rails'
 gem 'sorcery'
 #gem 'thin'
 gem 'sms_fu'
+gem 'pony'
 
 gem 'heroku'
