@@ -57,5 +57,6 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'sorcery'
 #gem 'thin'
+gem 'sms_fu'
 
 gem 'heroku'
