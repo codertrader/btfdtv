@@ -59,5 +59,6 @@ gem 'sorcery'
 #gem 'thin'
 gem 'sms_fu'
 gem 'pony'
+gem 'acts-as-taggable-on'
 
 gem 'heroku'

@@ -255,10 +255,11 @@
                                                 if(first===true){
                                                         isFirst = ' class="ytv-active"';
                                                         first = video.slug;
+							$("#archive-title").html( video.title );
                                                 }
 
 						var list = '';
-                                                list += '<li'+isFirst+'><a href="#" data-ytv="'+(video.slug)+'" class="ytv-clear">';
+                                                list += '<li'+isFirst+'><a href="#" data-ytv="'+(video.slug)+'" class="ytv-clear" data-title="'+(video.title)+'">';
                                                 list += '<div class="ytv-thumb"><div class="ytv-thumb-stroke"></div><span>'+(time)+'</span><img src="'+(video.thumb)+'"></div>';
                                                 list += '<div class="ytv-content"><b>'+(video.title)+'</b></div>';
                                                 //list += '</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span></div>';
@@ -342,7 +343,7 @@
                                 }
                                 target.parentNode.className="ytv-active";
                                 action.logic.loadVideo(target.dataset.ytv, true);
-                                
+                                $("#archive-title").html( target.dataset.title );            
                             }
                         
                         }
