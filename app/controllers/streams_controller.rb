@@ -1,10 +1,43 @@
 class StreamsController < ApplicationController
-  before_action :set_stream, only: [:show, :edit, :update, :destroy, :attachments]
+  before_action :set_stream, only: [:show, :edit, :update, :destroy, :attachments, :create_video_tag, :list_video_tags, :delete_video_tags]
 
-  before_action :require_login, except: [:index,:show,:attachments]
-  before_action :check_admin, except: [:index,:show,:attachments]
+  before_action :require_login, except: [:index,:show,:attachments, :list_video_tags]
+  before_action :check_admin, except: [:index,:show,:attachments, :list_video_tags]
 
   def attachments
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def list_video_tags
+    @video = Video.find_or_create_by(slug: params[:slug])
+
+    respond_to do |format|
+      format.js { render action: 'create_video_tag' }
+    end
+  end
+
+  def delete_video_tag
+    @video = Video.find_or_create_by(slug: params[:slug])
+    @video.tag_list.remove(params[:tag])
+    @video.save
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_video_tag
+    @video = Video.find_or_create_by(slug: params[:slug])
+    @video.stream = @stream
+    @video.save
+
+    params[:tag].split(/ /).each do |tag|
+      @video.tag_list << tag unless @video.tag_list.map(&:to_s).include?(tag)
+    end
+    @video.save
+
     respond_to do |format|
       format.js
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131003222044) do
+ActiveRecord::Schema.define(version: 20131004204727) do
 
   create_table "accouncements", force: true do |t|
     t.text     "message"
@@ -113,5 +113,12 @@ ActiveRecord::Schema.define(version: 20131003222044) do
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+
+  create_table "videos", force: true do |t|
+    t.integer  "stream_id"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

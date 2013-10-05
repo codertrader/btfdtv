@@ -131,6 +131,9 @@ h4 {
 								$("#live-link").html('<%=glyph(:microphone)%> LIVE');
 								$("#live-title").html( videos[0].title );
 							  }
+
+							  refreshVideoTags();
+
 	        					  setTimeout(updateLiveEvent, 10000);
 							},
 					    playopts: {vq:'hd720'} 
@@ -144,7 +147,8 @@ h4 {
 						           $("#archive-title").html( videos[0].title ); 	 
 							 } else {
 							   $("#archive-title").html( 'Video not available: <%=params[:direct]%>' );  
-							 }	
+							 }
+							 refreshVideoTags();	
 				  	      }, 
 				              playopts: {vq:'hd720'} 
 				             });

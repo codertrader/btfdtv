@@ -3,7 +3,10 @@ Btfdtv::Application.routes.draw do
   resources :attachments
   get 'streams/:id/attachments' => 'streams#attachments', as: 'stream_attachments'
   get 'streams/BTFDtv/direct/:direct' => 'streams#index', as: 'stream_direct'
-
+  post 'streams/:id/videos/:slug/tags' => 'streams#create_video_tag', as: 'stream_video_tags'
+  get 'streams/:id/videos/:slug/tags' => 'streams#list_video_tags', as: 'list_stream_video_tags'
+  delete 'streams/:id/videos/:slug/tags/:tag' => 'streams#delete_video_tag', as: 'delete_stream_video_tag'
+  
   get 'announcements/:id/hide' =>  'announcements#hide', as: 'hide_announcement'
   resources :announcements
 
@@ -26,7 +29,10 @@ Btfdtv::Application.routes.draw do
   resources :contributors
 
   # resources for streaming content
-  resources :streams
+  resources :streams do
+    resources :videos
+  end 
+  
 
   # stuff that BTFDtv sells for making money
   resources :products

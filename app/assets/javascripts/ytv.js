@@ -343,7 +343,8 @@
                                 }
                                 target.parentNode.className="ytv-active";
                                 action.logic.loadVideo(target.dataset.ytv, true);
-                                $("#archive-title").html( target.dataset.title );            
+                                $("#archive-title").html( target.dataset.title );
+			        refreshVideoTags();            
                             }
                         
                         }
