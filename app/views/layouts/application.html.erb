@@ -41,7 +41,7 @@
                     video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
                     tag: tag,
                    };
-        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.slug + '/tags.js';
+        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
         $.post( stream_video_tags_path, data, null, "script");
     }
 
