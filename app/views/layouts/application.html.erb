@@ -37,33 +37,33 @@
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
         var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
         var data = {
-                    user: {id:userId},
+                    userId: userId,
                     video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
-                    tag: tag
+                    tag: tag,
                    };
-        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
+        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.slug + '/tags.js';
         $.post( stream_video_tags_path, data, null, "script");
     }
 
-    function deleteVideoTag(tag) {
+    function deleteVideoTag(tag,id) {
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
         var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
         var data = {
-                    user: {id:userId},
+                    userId: userId,
                     video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
                     tag: tag,
 		    _method: 'delete'
                    };
         var delete_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags/' + encodeURIComponent(tag) + '.js';
         $.post( delete_video_tags_path, data, null, "script");
-        $("#tag-" + tag).remove();
+        $('#' + id).remove();
     }
 
     function refreshVideoTags() {
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
         var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
         var data = {
-                    user: {id:userId},
+                    userId: userId,
                     video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
                    };
         var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
@@ -79,7 +79,7 @@
   $('#stream-video-tag').bind('keypress', function(e) {
 	if(e.keyCode==13){ // enter pressed
            addVideoTag( $(this).val() );
-           addVideoTag( $(this).val('') );
+           $(this).val('');
 	}
   });
  

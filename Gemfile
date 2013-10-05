@@ -60,5 +60,6 @@ gem 'sorcery'
 gem 'sms_fu'
 gem 'pony'
 gem 'acts-as-taggable-on'
+gem 'obscenity'
 
 gem 'heroku'

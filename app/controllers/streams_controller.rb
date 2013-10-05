@@ -33,8 +33,8 @@ class StreamsController < ApplicationController
     @video.stream = @stream
     @video.save
 
-    params[:tag].split(/ /).each do |tag|
-      @video.tag_list << tag unless @video.tag_list.map(&:to_s).include?(tag)
+    params[:tag].split(/[ ,]/).each do |tag|
+      @video.tag_list << tag unless ( @video.tag_list.map(&:to_s).include?(tag) or Obscenity.profane?(tag) )
     end
     @video.save
 

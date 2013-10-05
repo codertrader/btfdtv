@@ -88,6 +88,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
+    obscenity (1.0.2)
     pg (0.16.0)
     polyglot (0.3.3)
     pony (1.5.1)
@@ -169,6 +170,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   less-rails
+  obscenity
   pg
   pony
   rails (= 4.0.0)
