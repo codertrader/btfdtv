@@ -279,11 +279,11 @@ h4 {
             var allopts = $.extend(true, {}, defoptions, options);
             allopts.maindiv = md;
 
-            var url = "http://gdata.youtube.com/feeds/api/users/" + allopts.user + "/live/events?v=2&inline=true&alt=json&status=active";
+            var url = "https://gdata.youtube.com/feeds/api/users/" + allopts.user + "/live/events?v=2&inline=true&alt=json&status=active";
 
-            $.getJSON(url, function(data) {
+            $.getJSON(url).always( function(data) {
                 var feed = data.feed;
-                var entries = feed.entry || [];
+                var entries = feed ? (feed.entry || []) : [];
                 var videos = [];
 
 		   for( var i = 0; i < entries.length; i++ ) {
