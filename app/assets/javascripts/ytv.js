@@ -256,6 +256,7 @@
                                                         isFirst = ' class="ytv-active"';
                                                         first = video.slug;
 							$("#archive-title").html( video.title );
+							$("#archive-slug").html( video.slug );
                                                 }
 
 						var list = '';
@@ -344,6 +345,7 @@
                                 target.parentNode.className="ytv-active";
                                 action.logic.loadVideo(target.dataset.ytv, true);
                                 $("#archive-title").html( target.dataset.title );
+                                $("#archive-slug").html( target.dataset.ytv );
 			        refreshVideoTags();            
                             }
                         

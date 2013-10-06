@@ -33,12 +33,28 @@
 
 <!-- Video Tags -->
 
+    function getActiveSlug() {
+      var selectedLink = $("ul#video-tabs > li.active > a")[0].id;
+      var activeSlug = 'OFFAIR';
+      if( selectedLink == 'archive-link' ) {
+        activeSlug = $("#archive-slug").text();
+      }
+      if( selectedLink == 'live-link' ) {
+        activeSlug = recentVideo.id;
+      }
+      if( selectedLink == 'direct-link' ) {
+        activeSlug = '<%=params[:direct]%>';
+      }
+      return activeSlug;
+    }
+
     function addVideoTag(tag) {
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
         var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
         var data = {
                     userId: userId,
-                    video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
+                    video: {slug:slug, stream_id:streamId},
                     tag: tag,
                    };
         var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
@@ -48,9 +64,10 @@
     function deleteVideoTag(tag,id) {
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
         var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
         var data = {
                     userId: userId,
-                    video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
+                    video: {slug:slug, stream_id:streamId},
                     tag: tag,
 		    _method: 'delete'
                    };
@@ -62,9 +79,10 @@
     function refreshVideoTags() {
         var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
         var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
         var data = {
                     userId: userId,
-                    video: {slug:'TnZlf-ixxoQ', stream_id:streamId},
+                    video: {slug:slug, stream_id:streamId},
                    };
         var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
         $.get( stream_video_tags_path, data, null, "script");
