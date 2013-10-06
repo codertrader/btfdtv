@@ -2,7 +2,7 @@ class StreamsController < ApplicationController
   before_action :set_stream, only: [:show, :edit, :update, :destroy, :attachments, :create_video_tag, :list_video_tags, :delete_video_tags]
 
   before_action :require_login, except: [:index,:show,:attachments, :list_video_tags]
-  before_action :check_admin, except: [:index,:show,:attachments, :list_video_tags]
+  before_action :check_admin, except: [:index,:show,:attachments, :list_video_tags, :create_video_tag]
 
   def attachments
     respond_to do |format|
@@ -20,7 +20,9 @@ class StreamsController < ApplicationController
 
   def delete_video_tag
     @video = Video.find_or_create_by(slug: params[:slug])
-    @video.tag_list.remove(params[:tag])
+    @video.taggings.each do |tagging|
+      (tagging.destroy) if tagging.tag.name===(params[:tag])
+    end
     @video.save
 
     respond_to do |format|
@@ -32,11 +34,16 @@ class StreamsController < ApplicationController
     @video = Video.find_or_create_by(slug: params[:slug])
     @video.stream = @stream
     @video.save
-
+ 
+    @user = User.find(params[:userId])
+    taggings = @video.tags_from(@user)
+    
     params[:tag].split(/[ ,]/).each do |tag|
-      @video.tag_list << tag unless ( @video.tag_list.map(&:to_s).include?(tag) or Obscenity.profane?(tag) )
+      #@video.tag_list << tag unless ( @video.tag_list.map(&:to_s).include?(tag) or Obscenity.profane?(tag) )
+      taggings << tag unless ( taggings.map(&:to_s).include?(tag) or Obscenity.profane?(tag) or @video.tag_list.map(&:to_s).include?(tag) )
     end
-    @video.save
+
+    @user.tag(@video, :with => taggings, :on => :tags) 
 
     respond_to do |format|
       format.js
