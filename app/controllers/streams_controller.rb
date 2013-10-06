@@ -40,7 +40,7 @@ class StreamsController < ApplicationController
     
     params[:tag].split(/[ ,]/).each do |tag|
       #@video.tag_list << tag unless ( @video.tag_list.map(&:to_s).include?(tag) or Obscenity.profane?(tag) )
-      taggings << tag unless ( taggings.map(&:to_s).include?(tag) or Obscenity.profane?(tag) or @video.tag_list.map(&:to_s).include?(tag) )
+      taggings << tag unless ( taggings.map(&:to_s).include?(tag) or Obscenity.profane?(tag) or @video.taggings.map(&:tag).map(&:name).include?(tag) )
     end
 
     @user.tag(@video, :with => taggings, :on => :tags) 
