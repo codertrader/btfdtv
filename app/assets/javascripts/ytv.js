@@ -257,6 +257,7 @@
                                                         first = video.slug;
 							$("#archive-title").html( video.title );
 							$("#archive-slug").html( video.slug );
+							refreshVideoTags();
                                                 }
 
 						var list = '';

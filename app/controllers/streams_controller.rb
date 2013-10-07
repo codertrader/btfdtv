@@ -22,7 +22,7 @@ class StreamsController < ApplicationController
     @video = Video.find_or_create_by(slug: params[:slug])
     @video.taggings.each do |tagging|
       if tagging.tag.name===(params[:tag])
-        if(current_user.admin == 1 || tagging.tagger_id == current_user.id) 
+        if(current_user.admin || tagging.tagger_id === current_user.id) 
           tagging.destroy
         else
           @delete_video_tag_error = 'Only an admin or the creator of the tag may delete a tag.'
