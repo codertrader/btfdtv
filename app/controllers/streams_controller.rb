@@ -2,7 +2,7 @@ class StreamsController < ApplicationController
   before_action :set_stream, only: [:show, :edit, :update, :destroy, :attachments, :create_video_tag, :list_video_tags, :delete_video_tags]
 
   before_action :require_login, except: [:index,:show,:attachments, :list_video_tags]
-  before_action :check_admin, except: [:index,:show,:attachments, :list_video_tags, :create_video_tag]
+  before_action :check_admin, except: [:index,:show,:attachments, :list_video_tags, :create_video_tag, :delete_video_tag]
 
   def attachments
     respond_to do |format|
@@ -21,7 +21,13 @@ class StreamsController < ApplicationController
   def delete_video_tag
     @video = Video.find_or_create_by(slug: params[:slug])
     @video.taggings.each do |tagging|
-      (tagging.destroy) if tagging.tag.name===(params[:tag])
+      if tagging.tag.name===(params[:tag])
+        if(current_user.admin == 1 || tagging.tagger_id == current_user.id) 
+          tagging.destroy
+        else
+          @delete_video_tag_error = 'Only an admin or the creator of the tag may delete a tag.'
+        end
+      end
     end
     @video.save
 
