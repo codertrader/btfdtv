@@ -313,7 +313,7 @@
                             },
                             playerVars: {
                                 enablejsapi: 1,
-                                origin: doc.domain,
+                                origin: document.domain,
                                 controls: settings.controls ? 1 : 0,
                                 rel: 0,
                                 showinfo: 0,

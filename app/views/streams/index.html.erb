@@ -137,7 +137,8 @@ h4 {
 
 	        					  setTimeout(updateLiveEvent, 10000);
 							},
-					    playopts: {vq:'hd720'} 
+					    playopts: {vq:'hd720',origin:document.domain},
+				            origin:document.domain 
 					   });
 
 	<% if params[:direct] %>		
@@ -214,7 +215,7 @@ h4 {
      var src = '';
 
      if( video ) {
-        src = 'http://www.youtube.com/embed/' + video.id;
+        src = 'https://www.youtube.com/embed/' + video.id;
         if (options.playopts) {
             src += '?';
             for (var k in options.playopts) {
