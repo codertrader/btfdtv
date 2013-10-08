@@ -110,7 +110,7 @@
                         return utils.endpoints.base+'feeds/api/users/'+settings.user+'?v=2&alt=json&extra=' + Math.random();
                     },
                     userVids: function(){
-                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&format=5&max-results=25&extra=' + Math.random();
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&max-results=49&extra=' + Math.random();
                     },
                     userPlaylists: function(){
                         return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=25&extra=' + Math.random();
@@ -313,7 +313,7 @@
                             },
                             playerVars: {
                                 enablejsapi: 1,
-                                origin: document.domain,
+                                origin: document.location.protocol + "//" + document.domain,
                                 controls: settings.controls ? 1 : 0,
                                 rel: 0,
                                 showinfo: 0,

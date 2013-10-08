@@ -137,8 +137,8 @@ h4 {
 
 	        					  setTimeout(updateLiveEvent, 10000);
 							},
-					    playopts: {vq:'hd720',origin:document.domain},
-				            origin:document.domain 
+					    playopts: {vq:'hd720',origin:document.location.protocol + "//" + document.domain},
+				            origin:document.location.protocol + "//" +document.domain 
 					   });
 
 	<% if params[:direct] %>		
