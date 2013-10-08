@@ -154,12 +154,40 @@ h4 {
 							 }
 							 refreshVideoTags();	
 				  	      }, 
-					    playopts: {vq:'hd720',origin:document.location.protocol + "//" + document.domain},
+					    playopts: {vq:'hd720',
+						       origin:document.location.protocol + "//" + document.domain,
+						       start:parseISO8601Date('<%=params[:t]%>')},
 				            origin:document.location.protocol + "//" +document.domain 
 				             });
         <% end %>
 
   });
+
+  function parseISO8601Date(s){
+ 
+  // parenthese matches:
+  // year month day    hours minutes seconds  
+  // dotmilliseconds 
+  // tzstring plusminus hours minutes
+  var re = /(\d)H(\d\d)M(\d\d)S/;
+ 
+  var d = [];
+  d = s.match(re);
+ 
+  // "2010-12-07T11:00:00.000-09:00" parses to:
+  //  ["2010-12-07T11:00:00.000-09:00", "2010", "12", "07", "11",
+  //     "00", "00", ".000", "-09:00", "-", "09", "00"]
+  // "2010-12-07T11:00:00.000Z" parses to:
+  //  ["2010-12-07T11:00:00.000Z",      "2010", "12", "07", "11", 
+  //     "00", "00", ".000", "Z", undefined, undefined, undefined]
+ 
+  if (! d) {
+    return '0'; // throw "Couldn't parse ISO 8601 date string '" + s + "'";
+  }
+
+  return "" + (parseInt(d[1])*60*60 + parseInt(d[2])*60 + parseInt(d[3])); 
+};
+
 </script>
 
 <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
