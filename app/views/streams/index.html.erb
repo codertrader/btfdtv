@@ -118,7 +118,7 @@ h4 {
        });
 
        $('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', 
-					    autoplay: <%= params[:direct].nil? %>, 
+					    autoplay: <%= params[:direct].nil? ? true : false %>, 
 					    loaded: function(videos,allopts) { 
 							  if( videos.length==0 ) { 
 							  	var alternateLink = '<%=params[:direct].nil? ? '#archive-link' : '#direct-link'%>'; 	
@@ -154,7 +154,8 @@ h4 {
 							 }
 							 refreshVideoTags();	
 				  	      }, 
-				              playopts: {vq:'hd720'} 
+					    playopts: {vq:'hd720',origin:document.location.protocol + "//" + document.domain},
+				            origin:document.location.protocol + "//" +document.domain 
 				             });
         <% end %>
 
