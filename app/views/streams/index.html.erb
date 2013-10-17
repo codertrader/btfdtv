@@ -405,7 +405,7 @@ h4 {
     var url = "http://gdata.youtube.com/feeds/api/users/" + '<%= Stream.first.name %>' + "/live/events?v=2&inline=true&alt=json&status=active";
     var xvideos = [];
     
-    $.getJSON(url, 
+    $.getJSON(url).always( 
 	      function(data) {
                 var feed = data.feed;
                 var entries = feed.entry || [];
