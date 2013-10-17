@@ -139,12 +139,14 @@
         $.post( '<%=attachments_path(:format=>'js')%>', data, null, "script");
     }
 
-  (function(d) {
+(function(d) {
     var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
     cwjs = d.createElement('script'); cwjs.type = 'text/javascript'; cwjs.async = true; cwjs.id = id
     cwjs.src = "//chatwing.com/code/76d898a5-08ba-4245-9638-7ffbd03e5b23/popout";
     d.getElementsByTagName('head')[0].appendChild(cwjs);
   })(document);
+
+
 });
 
 </script>
