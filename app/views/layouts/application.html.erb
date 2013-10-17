@@ -84,7 +84,7 @@
         var slug = getActiveSlug();
         var data = {
                     userId: userId,
-                    video: {slug:slug, stream_id:streamId},
+                    video: {slug:slug, stream_id:streamId}
                    };
         var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
         $.get( stream_video_tags_path, data, null, "script");
