@@ -316,9 +316,9 @@ h4 {
             var allopts = $.extend(true, {}, defoptions, options);
             allopts.maindiv = md;
 
-            var url = "https://gdata.youtube.com/feeds/api/users/" + allopts.user + "/live/events?v=2&inline=true&alt=json&status=active";
+            var url = "https://gdata.youtube.com/feeds/api/users/" + allopts.user + "/live/events?v=2&inline=true&alt=json-in-script&status=active&callback=?";
 
-            $.getJSON(url).always( function(data) {
+            $.getJSON(url,null, function(data) {
                 var feed = data.feed;
                 var entries = feed ? (feed.entry || []) : [];
                 var videos = [];
@@ -402,10 +402,10 @@ h4 {
   
   function updateLiveEvent() {
 
-    var url = "http://gdata.youtube.com/feeds/api/users/" + '<%= Stream.first.name %>' + "/live/events?v=2&inline=true&alt=json&status=active";
+    var url = "http://gdata.youtube.com/feeds/api/users/" + '<%= Stream.first.name %>' + "/live/events?v=2&inline=true&alt=json-in-script&status=active&callback=?";
     var xvideos = [];
     
-    $.getJSON(url).always( 
+    $.getJSON(url, null,  
 	      function(data) {
                 var feed = data.feed;
                 var entries = feed.entry || [];
