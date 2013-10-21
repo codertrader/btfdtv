@@ -1,0 +1,585 @@
+<%= content_for :logo do %>
+<!--img id="logo-header" src="assets/images/BTFD-roku-366x210.jpg" class="pull-left" style="display:inline-block; margin-top:-1.7em; margin-left:-1em; padding:0; z-index:-5" height="70px" alt="Logo"-->
+<img id="logo-header" src="assets/images/BTFDtvDark.png" style="margin-top:-1.7em;" height="70px" width="70px" alt="Logo">
+<% end %>
+
+<style>
+body {background-color: #2C3539;}
+
+.header .navbar-default .navbar-nav > li > a {
+  color: #D1D0CE; // light grey
+}
+
+.nav-pills a {
+  color: #D1D0CE; // light grey
+}
+
+.nav-pills a:hover {
+  color: #72c02c; // green
+//  color: #80b438; // green
+}
+
+.nav-pills a#live-link:hover {
+  color: white; // green
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+//  background-color: #72c02c;
+//  background-color: #80b438; // green
+  background-color: #7AC624; // green
+  color: white;
+}
+
+/*.nav > li > a:focus {
+background-color: blue;
+}*/
+
+h4 {
+  color: white;
+  background-color: dark-grey;
+}
+
+/*
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
+    background-color: #51a351;
+    color: white;
+    font-weight: bold;
+}
+*/
+</style>
+
+<style>
+.center {
+   margin: 0 auto !important;
+   float: none !important;
+}
+</style>
+
+<div class="col-md-12 pull-center">
+    <div class="row">	
+	<div class="col-md-9">
+
+		<ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="video-tabs" >
+		  <li class="active"><a href="#live" data-toggle="pill" id="live-link"><%=glyph(:microphone)%> CHECKING...</a></li>
+		  <li><a href="#archive" data-toggle="pill" id="archive-link"><%=glyph(:briefcase) %> Archive</a></li>
+		<% if params[:direct] %>
+		  <li><a href="#direct" data-toggle="pill" id="direct-link"><%=glyph(:bookmark) %> Direct</a></li>
+		<% end %>
+	        </ul>
+
+		<div class="tab-content">
+		  <div class="tab-pane active" id="live" style="overflow:hidden;">
+		      <div class="row-fluid">
+			<div id="live-youtube" class="col-md-12" style="margin:auto; max-width: 720px; width:100%; height:400px; max-height:400px; overflow:hidden;"></div>
+		      </div>
+		      <div class="row-fluid"><div class="youtube-metadata" class="col-md-12"><i><h4 id="live-title"></h4></i></div></div>
+		  </div>
+		  
+		  <div class="tab-pane" id="archive">
+		    <div class="row-fluid">
+		      <div id="youtube-tv-frame"><p class="text-info"><strong>Loading Archive...</strong></p></div>
+		    </div>
+		    <div class="row-fluid"><div class="youtube-metadata" class="col-md-12"><i><h4 id="archive-title"></h4></i><h4 id="archive-slug" style="display:none;"></h4></div></div>
+		  </div>
+
+		  <div class="tab-pane" id="direct" style="overflow:hidden;">
+		    <div class="row-fluid">
+		      <div id="direct-youtube" class="col-md-12" style="margin:auto; max-width: 720px; width:100%; height:400px; max-height:400px; overflow:hidden;"></div>
+		    </div> 
+		    <div class="row-fluid"><div class="youtube-metadata" class="col-md-12"><i><h4 id="direct-title"></h4></i></div></div>
+		  </div>
+		</div>
+	</div>
+<div class="col-md-3">
+
+	       <ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="myTab" >
+		<li class="active"><a href="#about" data-toggle="pill"><%=glyph(:home)%></a></li>
+		<% if @stream and @stream.attachments %><li><a href="#attachments" data-toggle="pill" id="attachments-link"><%=glyph(:file)%></a></li><% end %>
+		<% if @stream %><li><a href="#tags" data-toggle="pill" id="attachments-link"><%=glyph(:tags)%></a></li><% end %>
+		<li><a href="#twitter" data-toggle="pill"><%=glyph(:twitter)%></a></li>
+		<li><a href="#chat" data-toggle="pill"><%=glyph(:comments)%></a></li>
+	       </ul>
+
+	    <div class="tab-content">
+	     <div class="tab-pane active" id="about" style="overflow:hidden;">
+	       
+	       <div class="well">
+		<h3>BTFDtv</h3>
+		<p class="muted"><%= glyph(:star) %> 
+		<strong>BTFDtv</strong> has no producers, writers, editors or on air rules. 
+	       	</p>
+		<p class="muted"><%= glyph(:music) %> 
+		<a href="itpc://dl.dropboxusercontent.com/u/224919574/feed.xml" target="blank">iTunes - Subscribe & Listen</a>.
+		</p>
+		<p class="muted"><%= glyph(:rss) %> 
+		<a href="http://feeds.feedburner.com/BtfdtvAudioPodcast" target="blank">RSS - Subscribe & Read</a>.
+		</p>
+		<p class="muted"><%= glyph(:twitter) %> 
+		<a href="http://www.twitter.com/BTFDtv" target="blank">Follow us</a>.
+		</p>
+		<p class="muted"><%= glyph(:pencil) %> 
+		<a href="mailto:BTFDtv@gmail.com" target="blank">Email us</a>.
+	 	</p>
+		<p class="muted"> 
+		Our network thrives on the support of viewers like you. 
+		</p>
+	  	  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="FKXTVK8ZWA8VU">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		  </form>
+		  <div id="bitcoin">
+		    <a class="coinbase-button" data-code="21734b0c8b863d64726cf884285b6be1" data-button-style="donation_small" href="https://coinbase.com/checkouts/21734b0c8b863d64726cf884285b6be1">Donate Bitcoins</a><script src="https://coinbase.com/assets/button.js" type="text/javascript"></script>
+		  </div>
+		  <!--div id="chatwing-wrapper" style="display:none;"> 
+			<div id="chatwing-button-76d898a5-08ba-4245-9638-7ffbd03e5b23" style="display:none;"></div>
+		  </div-->                 
+	       </div> 
+	     
+	    </div>
+
+	    <% if @stream %> 
+	    <div class="tab-pane" id="attachments">
+	      <div id="attachments-well" class="attachments well">
+		<h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream)%>" data-remote="true" class="btn"><%=glyph(:refresh)%></a></h3> 
+		<% if logged_in? %>	
+		<div id="dropbox">
+		  <form>
+		    <input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" data-extensions=".pdf .doc .docx .png .jpg .gif" style="visibility: hidden;"/>
+		  </form>
+		</div>
+		<% else %>
+		  <p class="text-error"><strong><%= link_to 'Log in', login_path %> to share attachments.</strong></p>
+		<% end %>
+
+		<% if @stream.attachments.empty? %>	
+		  <p class="text-info">No attachments found.</p>
+		  <div class="row attachment"></div>
+		<% else %>
+		<% end %>
+		<div id="attachments-recent">
+		<% @stream.attachments.order(:created_at).reverse_order.limit(10).each do |attachment| %>
+		  <div class="row attachment" style="margin-left:.25em;">
+		    <a href='<%=attachment.link%>' target='blank'><img src='<%=attachment.thumbnails_64x64 or attachment.icon%>' height='32px' width='32px'>&nbsp;<%=attachment.name%></a><br/>
+		  </div>
+		<% end %>
+		</div>
+	      </div>
+	    </div>
+	    <% end %>
+
+	    <div class="tab-pane" id="twitter">
+	     <a class="twitter-timeline" href="https://twitter.com/search?q=%23btfdtv" data-widget-id="377524310564274176">Tweets about "#btfdtv"</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	    </div>
+
+	    <div class="tab-pane" id="chat">
+		<!-- Begin chatwing.com chatbox -->
+		<iframe src="http://chatwing.com/chatbox/76d898a5-08ba-4245-9638-7ffbd03e5b23" width="100%" height="400" frameborder="0" scrolling="0">Please contact us at info@chatwing.com if you cant embed the chatbox</iframe>
+		<!-- End chatwing.com chatbox -->
+	    </div>
+
+	    <% if @stream %>
+	    <div class="tab-pane" id="tags">
+	      <div id="tags-content" class="well">
+		<h3>Video Tags&nbsp;<a href="#" id="refresh-video-tags" class="btn"><%=glyph(:refresh)%></a></h3> 
+
+		<% if logged_in? %>
+		<div id="tags-input">
+		  <p class="text-info">@people $TICKERS #topics</p>
+		  <%= text_field_tag 'stream-video-tag' %> 
+		</div>
+		<% else %>
+		  <p class="text-error"><strong><%= link_to 'Log in', login_path %> to tag @people $TICKERS and #topics.</strong></p>
+		<% end %>
+		<div id="tags-output">
+		  <ul id="video-tags-list" style="list-style-type:none;">
+		  </ul>
+		</div>
+	      </div> 
+	    </div>
+	    <% end %>
+	 
+	      </div>
+	    </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+  var API_KEY = 'AIzaSyCRV03KpFosQojWCk0py-lcYTzrvrguiWE';
+
+  var recentVideo = {title: 'OFF AIR', id: 'NA', thumbnails: ''};
+
+  googleApiClientReady = function() {
+    gapi.auth.init(function() {
+      window.setTimeout(checkAuth, 1);
+    });
+  }
+
+  function checkAuth() {
+    loadAPIClientInterfaces();
+  }
+
+  function loadAPIClientInterfaces() {
+    gapi.client.load('youtube', 'v3', function() {
+      handleAPILoaded();
+    });
+  }
+
+  // Once the api loads call a function to get the uploads playlist id.
+  function handleAPILoaded() {
+    gapi.client.setApiKey(API_KEY);
+    windowReady();
+  }
+
+  windowReady = function() {
+
+    // we have to wait for the youtube v3 API because some archives are deleted and v2 doesn't tell you.
+    $('#youtube-tv-frame').ytv({
+      user: '<%= Stream.first.name %>',
+      accent: '#d51c18',
+      autoplay: false,
+      chainVideos: 1
+    });
+
+  }
+
+  $(document).ready( function() {
+
+       $(function () {
+         $('#video-tabs a:first').tab('show')
+       });
+
+       $('#video-tabs a').click(function (e) {
+         e.preventDefault();
+  	 $(this).tab('show');
+	 refreshVideoTags();
+       });
+
+       <% if(params[:ustream]) %>
+       $('#video-tabs a#ustream-link').click();
+       <% end %>
+
+       $('#live-youtube').youTubeLiveEvent({user:'<%= Stream.first.name %>', 
+					    autoplay: <%= params[:direct].nil? ? true : false %>, 
+					    loaded: function(videos,allopts) { 
+							  if( videos.length==0 ) { 
+							  	var alternateLink = '<%=params[:direct].nil? ? '#archive-link' : '#direct-link'%>'; 	
+								$(alternateLink).trigger('click'); 
+								$("#live-link").css('background-color','#CD332D');
+								$("#live-link").html('<%=glyph(:microphone)%> OFF AIR');
+								$("#live-title").html( 'BTFDtv is currently OFF AIR. The next LIVE show will play automatically.'  );
+							  } else { 
+								recentVideo = videos[0];
+								$("#live-link").css('background-color','#72c02c'); 
+								$("#live-link").html('<%=glyph(:microphone)%> LIVE');
+								$("#live-title").html( videos[0].title );
+							  }
+
+							  refreshVideoTags();
+
+	        					  setTimeout(updateLiveEvent, 10000);
+							},
+					    playopts: {vq:'hd720',origin:document.location.protocol + "//" + document.domain},
+				            origin:document.location.protocol + "//" +document.domain 
+					   });
+
+	<% if params[:direct] %>		
+	  $('#direct-youtube').youTubeDirect({user:'<%= Stream.first.name %>', 
+	                                      autoplay: true, 
+					      loaded: function(videos,allopts) {
+						         if( videos.length > 0 ) {
+						           $("#archive-title").html( videos[0].title );
+							   $("#archive-slug").html( videos[0].id ); 	 
+							 } else {
+							   $("#archive-title").html( 'Video not available: <%=params[:direct]%>' );  
+							   $("#archive-slug").html( 'NA' ); 	 
+							 }
+							 refreshVideoTags();	
+				  	      }, 
+					    playopts: {vq:'hd720',
+						       origin:document.location.protocol + "//" + document.domain,
+						       start:parseISO8601Date('<%=params[:t]%>')},
+				            origin:document.location.protocol + "//" +document.domain 
+				             });
+        <% end %>
+
+  });
+
+  function parseISO8601Date(s){
+ 
+  // parenthese matches:
+  // year month day    hours minutes seconds  
+  // dotmilliseconds 
+  // tzstring plusminus hours minutes
+  var re = /(\d)H(\d\d)M(\d\d)S/;
+ 
+  var d = [];
+  d = s.match(re);
+ 
+  // "2010-12-07T11:00:00.000-09:00" parses to:
+  //  ["2010-12-07T11:00:00.000-09:00", "2010", "12", "07", "11",
+  //     "00", "00", ".000", "-09:00", "-", "09", "00"]
+  // "2010-12-07T11:00:00.000Z" parses to:
+  //  ["2010-12-07T11:00:00.000Z",      "2010", "12", "07", "11", 
+  //     "00", "00", ".000", "Z", undefined, undefined, undefined]
+ 
+  if (! d) {
+    return '0'; // throw "Couldn't parse ISO 8601 date string '" + s + "'";
+  }
+
+  return "" + (parseInt(d[1])*60*60 + parseInt(d[2])*60 + parseInt(d[3])); 
+};
+
+</script>
+
+<style type="text/css">
+<!--
+
+#player {
+    width: 100%;
+    max-width: 720px;
+    height: 400px;
+    overflow: hidden;
+    background: white;
+    position: absolute;
+    //border: solid 0px gray;
+    border: none;
+}
+
+.youtube .xcarousel {
+    width: 20%;
+    height: 100%;
+    overflow: auto;
+    position: absolute;
+    right: 0px;
+// z-index: 3;
+}
+
+.youtube .thumbnail {
+    margin: 2px;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.youtube iframe.player {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;//auto
+    border: none !important;
+}
+
+-->
+</style>
+
+<script type="text/javascript">
+(function() {
+    function createPlayer(jqe, video, options) {
+        var ifr = $('iframe', jqe);
+        if (ifr.length === 0) {
+            ifr = $('<iframe scrolling="no">');
+            ifr.addClass('player');
+	    ifr.css('border','none');
+        }
+
+     var src = '';
+
+     if( video ) {
+        src = 'https://www.youtube.com/embed/' + video.id;
+        if (options.playopts) {
+            src += '?';
+            for (var k in options.playopts) {
+                src+= k + '=' + options.playopts[k] + '&';
+            }
+            src += '_a=b';
+        }
+        ifr.attr('src', src);
+     } else {
+        //ifr.attr('src','assets/noliveshow.jpg'); // Image Source is techinasia 
+        //ifr.attr('src','assets/offair.jpg'); // Image Source is techinasia 
+        ifr.attr('src',''); // Image Source is techinasia 
+     }
+        jqe.append(ifr);
+    }
+    
+    function createCarousel(jqe, videos, options) {
+        var car = $('div.xcarousel', jqe);
+        if (car.length === 0) {
+            car = $('<div>');
+            car.addClass('xcarousel');
+            jqe.append(car);
+            
+        }
+        $.each(videos, function(i,video) {
+            options.thumbnail(car, video, options);
+        });
+    }
+    
+    function createThumbnail(jqe, video, options) {
+        var imgurl = video.thumbnails[0].url;
+        var img = $('img[src="' + imgurl + '"]');
+        if (img.length !== 0) return;
+        img = $('<img>');
+        img.addClass('thumbnail');
+        jqe.append(img);
+        img.attr('src', imgurl);
+        img.attr('title', video.title);
+        img.click(function() {
+            options.player(options.maindiv, video, $.extend(true,{},options,{playopts:{autoplay:1}}));
+        });
+    }
+    
+    var defoptions = {
+        autoplay: true,
+        user: 'null',
+        carousel: function(){}, //createCarousel,
+        player: createPlayer,
+        thumbnail: createThumbnail,
+        loaded: function() {},
+        playopts: {
+            autoplay: 1,
+            egm: 1,
+            autohide: 1,
+            fs: 1,
+            showinfo: 0
+        }
+    };
+    
+ $.fn.extend({
+        youTubeLiveEvent: function(options) {
+            var md = $(this);
+            md.addClass('youtube');
+            md.addClass('youtube-channel');
+            var allopts = $.extend(true, {}, defoptions, options);
+            allopts.maindiv = md;
+
+            var url = "https://gdata.youtube.com/feeds/api/users/" + allopts.user + "/live/events?v=2&inline=true&alt=json-in-script&status=active&callback=?";
+
+            $.getJSON(url,null, function(data) {
+                var feed = data.feed;
+                var entries = feed ? (feed.entry || []) : [];
+                var videos = [];
+
+		   for( var i = 0; i < entries.length; i++ ) {
+                    var entry = entries[i];
+
+		    var href = entry.link[1].href;
+            	    var slug= href.substr( href.indexOf('videos/') + 7 );
+                    slug = slug.substr( 0, slug.length - 4 ); 
+
+                    var video = {
+                        title: entry.title.$t,
+                        id: slug,
+                        thumbnails: entry.media$group.media$thumbnail
+                    };
+
+                    videos.push(video);
+	        }
+
+                allopts.allvideos = videos;
+                allopts.carousel(md, videos, allopts);
+                allopts.player(md, videos[0], allopts);
+                allopts.loaded(videos, allopts);
+            });
+        }
+    });
+
+ $.fn.extend({
+        youTubeDirect: function(options) {
+            var md = $(this);
+            md.addClass('youtube');
+            md.addClass('youtube-channel');
+            var allopts = $.extend(true, {}, defoptions, options);
+            allopts.maindiv = md;
+
+                var videos = [];
+
+                var video = {
+                      id: '<%=params[:direct]%>'
+                };
+
+                videos.push(video);
+
+                allopts.allvideos = videos;
+                allopts.carousel(md, videos, allopts);
+                allopts.player(md, videos[0], allopts);
+                allopts.loaded(videos, allopts);
+        }
+    });
+
+ 
+    $.fn.extend({
+        youTubeChannel: function(options) {
+            var md = $(this);
+            md.addClass('youtube');
+            md.addClass('youtube-channel');
+            var allopts = $.extend(true, {}, defoptions, options);
+            allopts.maindiv = md;
+            $.getJSON('http://gdata.youtube.com/feeds/users/' + allopts.user + '/uploads?alt=json-in-script&format=5&callback=?', null, function(data) {
+                var feed = data.feed;
+                var videos = [];
+                $.each(feed.entry, function(i, entry) {
+                    var video = {
+                        title: entry.title.$t,
+                        id: entry.id.$t.match('[^/]*$'),
+                        thumbnails: entry.media$group.media$thumbnail
+                    };
+
+                    videos.push(video);
+                });
+                allopts.allvideos = videos;
+                allopts.carousel(md, videos, allopts);
+                allopts.player(md, videos[0], allopts);
+                allopts.loaded(videos, allopts);
+            });
+        }
+    });
+    
+})();
+  
+  function updateLiveEvent() {
+
+    var url = "http://gdata.youtube.com/feeds/api/users/" + '<%= Stream.first.name %>' + "/live/events?v=2&inline=true&alt=json-in-script&status=active&callback=?";
+    var xvideos = [];
+    
+    $.getJSON(url, null,  
+	      function(data) {
+                var feed = data.feed;
+                var entries = feed.entry || [];
+
+                for( var i = 0; i < entries.length; i++ ) {
+                  var entry = entries[i];
+                  var href = entry.link[1].href;
+                  var slug= href.substr( href.indexOf('videos/') + 7 );
+                  slug = slug.substr( 0, slug.length - 4 );
+
+                  var video = {
+                    title: entry.title.$t,
+                    id: slug,
+                    thumbnails: entry.media$group.media$thumbnail
+                   };
+
+                   xvideos.push(video);
+                 }
+
+                 if( xvideos[0] && xvideos[0].id != recentVideo.id ) {
+                   location.reload();
+    		 } 
+                
+		 if( typeof xvideos[0] == 'undefined' || xvideos[0] == null) { 
+                   $("#live-link").css('background-color','#CD332D');
+                   $("#live-link").html('<%=glyph(:microphone)%> OFF AIR');
+	     	   $("#live-title").html( 'BTFDtv is currently OFF AIR. The next LIVE show will play automatically.'  );
+                 }
+
+              });
+
+    setTimeout(updateLiveEvent, 10000);
+  }
+      
+</script>
+
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>

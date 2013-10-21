@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+
+<head>
+
+    <title>BTFDtv | Welcome...</title>
+
+    <!-- Meta -->
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+
+<!-- JS Global Compulsory -->
+<script type="text/javascript" src="assets/plugins/jquery-1.10.2.min.js"></script>
+
+<script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="assets/plugins/hover-dropdown.min.js"></script>
+
+<script type="text/javascript" src="assets/plugins/back-to-top.js"></script>
+
+<!-- JS Implementing Plugins -->
+
+<script type="text/javascript" src="assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+
+<script type="text/javascript" src="assets/plugins/parallax-slider/js/modernizr.js"></script>
+
+<script type="text/javascript" src="assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+
+<!-- JS Page Level -->
+
+<script type="text/javascript" src="assets/js/app.js"></script>
+
+<script type="text/javascript" src="assets/js/pages/index.js"></script>
+
+
+    <!-- CSS Global Compulsory-->
+
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="assets/css/headers/header1.css">
+
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <link rel="shortcut icon" href="favicon.ico">        
+
+    <!-- CSS Implementing Plugins -->    
+
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+
+    <link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css">    	
+
+    <link rel="stylesheet" href="assets/plugins/parallax-slider/css/parallax-slider.css">
+
+    <!-- CSS Theme -->    
+
+    <!--link rel="stylesheet" href="assets/css/themes/default.css" id="style_color"-->
+
+    <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1">    
+
+  <%= stylesheet_link_tag    "ytv", :media => "all"  %>
+  <!-- %= javascript_include_tag "application" % -->
+  <%= javascript_include_tag "ytv" %>
+
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="rrxsieen8kpvfcg"></script>
+
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="gu0M6k7t4ahX0ifdHXsGM4_O13K2Sh_hs58NhL4n5rU" />
+
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-44572631-1', 'btfd.tv');
+    ga('send', 'pageview');
+
+    jQuery.support.cors = true;
+    $.support.cors = true;
+  </script>
+
+  <script type="text/javascript">
+<!-- Video Tags -->
+
+    function getActiveSlug() {
+      var selectedLink = $("ul#video-tabs > li.active > a")[0].id;
+      var activeSlug = 'OFFAIR';
+      if( selectedLink == 'archive-link' ) {
+        activeSlug = $("#archive-slug").text();
+      }
+      if( selectedLink == 'live-link' ) {
+        activeSlug = recentVideo.id;
+      }
+      if( selectedLink == 'direct-link' ) {
+        activeSlug = '<%=params[:direct]%>';
+      }
+      return activeSlug;
+    }
+
+    function addVideoTag(tag) {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
+        var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
+        var data = {
+                    userId: userId,
+                    video: {slug:slug, stream_id:streamId},
+                    tag: tag
+                   };
+        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
+        $.post( stream_video_tags_path, data, null, "script");
+    }
+
+    function deleteVideoTag(tag,id) {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
+        var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
+        var data = {
+                    userId: userId,
+                    video: {slug:slug, stream_id:streamId},
+                    tag: tag,
+                    _method: 'delete'
+                   };
+        var delete_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags/' + encodeURIComponent(tag) + '.js';
+        $.post( delete_video_tags_path, data, null, "script");
+        $('#' + id).remove();
+    }
+
+    function refreshVideoTags() {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
+        var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
+        var data = {
+                    userId: userId,
+                    video: {slug:slug, stream_id:streamId}
+                   };
+        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
+        $.get( stream_video_tags_path, data, null, "script");
+    }
+
+<!-- End Video Tags -->
+
+$(document).ready(function() {
+
+  $('#stream-video-tag').bind('keypress', function(e) {
+	if(e.keyCode==13){ // enter pressed
+           addVideoTag( $(this).val() );
+           $(this).val('');
+	}
+  });
+ 
+  $('#refresh-video-tags').click( function() {
+     refreshVideoTags(); 
+  });
+ 
+  $.ajaxSetup({
+    timeout: 0
+  });
+
+  // add an event listener to a Chooser button
+ if( document.getElementById("file-chooser") ) {
+    document.getElementById("file-chooser").addEventListener("DbxChooserSuccess",
+        function(e) {
+            for( var i = 0; i < e.files.length; ++i ) {
+              var file = e.files[i];
+              submitWithAjax(file); 
+            }
+
+        }, false);
+
+
+    document.getElementById("file-chooser").addEventListener("DbxChooserCancel",
+        function(e) {
+            // for testing: alert("File Chooser Canceled.");
+        }, false);
+}
+
+    function submitWithAjax(file) {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>; 
+	var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+	var data = {
+		    attachment: {stream_id:streamId, name:file.name, link:file.link, bytes:file.bytes, icon:file.icon, thumbnails_64x64:file.thumbnails['64x64']},
+		    user: {id:userId} 
+		   };
+        $.post( '<%=attachments_path(:format=>'js')%>', data, null, "script");
+    }
+/*
+(function(d) {
+    var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
+    cwjs = d.createElement('script'); cwjs.type = 'text/javascript'; cwjs.async = true; cwjs.id = id
+    cwjs.src = "//chatwing.com/code/76d898a5-08ba-4245-9638-7ffbd03e5b23/popout";
+    d.getElementsByTagName('head')[0].appendChild(cwjs);
+  })(document);
+*/
+
+});
+
+
+  </script>
+
+</head>	
+
+
+
+<body>
+
+<%= render :partial => 'home/top' %>   
+
+<%= render :partial => 'home/header' %>
+
+  <div class="container-fluid">
+    <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %>">
+         <a class="close" data-dismiss="alert" href="#">&times;</a>      
+         <%= value %>
+        </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+
+<%= render :partial => 'home/footer' %>
+
+<%= render :partial => 'home/copyright' %>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function() {
+
+      	App.init();
+
+        App.initSliders();
+
+        Index.initParallaxSlider();
+
+    });
+
+</script>
+
+<!--[if lt IE 9]>
+
+    <script src="assets/plugins/respond.js"></script>
+
+<![endif]-->
+
+
+
+</body>
+
+</html>

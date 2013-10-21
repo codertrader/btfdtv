@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :clear_cache
 
+  layout 'makeover'
+
   def clear_cache
     # headers['Last-Modified'] = Time.now.httpdate
 	headers['Access-Control-Allow-Origin'] = 'http://btfd.tv,http://www.btfd.tv,http://btfdtv.com,http://www.btfdtv.com,http://btfdtv.org,http://www.btfdtv.org,http://localhost,http://localhost:3000'

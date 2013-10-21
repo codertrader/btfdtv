@@ -1,0 +1,181 @@
+<!--=== Header ===-->    
+
+<div class="header">
+
+    <div class="navbar navbar-default" role="navigation">
+
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+
+                    <span class="sr-only">Toggle navigation</span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                </button>
+
+                <a class="navbar-brand" href="/">
+
+                    <%= content_for :logo %>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <div class="collapse navbar-collapse navbar-responsive-collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="dropdown active">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+
+                            Home
+
+                            <i class="icon-angle-down"></i>
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li class="active"><a href="index.html">Option 1: Default Page</a></li>
+
+                            <li><a href="page_home1.html">Option 2: Layer Slider</a></li>
+
+                            <li><a href="page_home2.html">Option 3: Revolution Slider</a></li>
+
+                            <li><a href="page_home3.html">Option 4: Amazing Content</a></li>
+
+                            <li><a href="page_home4.html">Option 5: Home Sidebar</a></li>
+
+                            <li><a href="page_home5.html">Option 6: Home Flatty</a></li>
+
+                            <li><a href="page_home6.html">Option 7: Home Magazine</a></li>
+
+                            <li><a href="page_home7.html">Option 8: Home Portfolio</a></li>
+
+                        </ul>
+
+                    </li>
+
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+
+                            Channels 
+
+                            <i class="icon-angle-down"></i>
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+			    <li><a href="/streams">BTFDtv</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+
+                            Featured
+
+                            <i class="icon-angle-down"></i>
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li><a href="feature_grid.html">Grid Layout</a></li>
+
+                            <li><a href="feature_boxes.html">Content Boxes</a></li>
+
+                            <li><a href="feature_typography.html">Typography</a></li>
+
+                            <li><a href="feature_tagline_boxes.html">Tagline Boxes</a></li>
+
+                            <li><a href="feature_buttons.html">Buttons</a></li>
+
+                            <li><a href="feature_icons.html">Icons</a></li>
+
+                            <li><a href="feature_thumbails.html">Thumbails</a></li>
+
+                            <li><a href="feature_components.html">Components</a></li>
+
+                            <li><a href="feature_accardion_and_tabs.html">Accardion and Tabs</a></li>
+
+                            <li><a href="feature_navigations.html">Navigations</a></li>
+
+                            <li><a href="feature_tables.html">Tables</a></li>
+
+                            <li><a href="feature_forms.html">Forms</a></li>
+
+                            <li><a href="feature_testimonials.html">Testimonials</a></li>
+
+                        </ul>
+
+                    </li>
+
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">
+
+                            Contact Us
+
+                            <i class="icon-angle-down"></i>
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li><a href="/contributors">Contributors</a></li>
+                            
+			    <li><a target="_blank" href="http://www.twitter.com/BTFDtv">Twitter</a></li>
+
+                            <li><a href="mailto:btfdtv@gmail.com">Email</a></li>
+
+                        </ul>
+
+                    </li>                    
+
+                    <li class="hidden-sm"><a class="search"><i class="icon-search search-btn"></i></a></li>
+
+                </ul>
+
+                <div class="search-open">
+
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" placeholder="Coming Soon">
+
+                        <span class="input-group-btn">
+
+                            <button class="btn-u" type="button">Go</button>
+
+                        </span>
+
+                    </div><!-- /input-group -->
+
+                </div>                
+
+            </div><!-- /navbar-collapse -->
+
+        </div>    
+
+    </div>    
+
+</div><!--/header-->
+<!--=== End Header ===-->    
+

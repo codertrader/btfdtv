@@ -1,5 +1,7 @@
 Btfdtv::Application.routes.draw do
 
+  get 'home' => 'home#index', as: "home"
+
   resources :attachments
   get 'streams/:id/attachments' => 'streams#attachments', as: 'stream_attachments'
   get 'streams/BTFDtv/direct/:direct' => 'streams#index', as: 'stream_direct'
@@ -45,7 +47,9 @@ Btfdtv::Application.routes.draw do
 
   get '/:direct' => 'streams#index', as: 'tiny_stream_direct'
 
-  root 'streams#index'
+  #root 'streams#index'
+
+  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,143 @@
+@import "twitter/bootstrap/bootstrap";
+
+body { padding-top: 45px; }
+
+@iconSpritePath: image-path('glyphicons-halflings.png');
+@iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+// Global values
+// --------------------------------------------------
+
+// Grays
+// -------------------------
+
+@gray-darker:            #272B30;
+@gray-dark:              #3A3F44;
+@gray:                   #52575C;
+@gray-light:             #7A8288;
+@gray-lighter:           #999;
+
+// Brand colors
+// -------------------------
+
+@brand-primary:         @gray-light;
+@brand-success:         #62c462;
+@brand-warning:         #f89406;
+@brand-danger:          #ee5f5b;
+@brand-info:            #5bc0de;
+
+// Scaffolding
+// -------------------------
+
+@body-bg:               @gray-darker;
+@text-color:            #C8C8C8;
+
+// Links
+// -------------------------
+
+@link-color:            #fff;
+@link-hover-color:      #fff;
+
+
+// Navbar
+// -------------------------
+
+// Basics of a navbar
+@navbar-height:                    50px;
+//@navbar-margin-bottom:             @line-height-computed;
+@navbar-default-color:             @text-color;
+@navbar-default-bg:                @gray-dark;
+@navbar-default-border:            darken(@navbar-default-bg, 6.5%);
+//@navbar-border-radius:             @border-radius-base;
+//@navbar-padding-horizontal:        floor(@grid-gutter-width / 2);
+//@navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
+
+// Navbar links
+@navbar-default-link-color:                @text-color;
+@navbar-default-link-hover-color:          #fff;
+@navbar-default-link-hover-bg:             darken(@navbar-default-bg, 8%);
+@navbar-default-link-active-color:         #fff;
+@navbar-default-link-active-bg:            darken(@navbar-default-bg, 8%);
+@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-hover-color:         #fff;
+@navbar-default-brand-hover-bg:            none;
+
+// Navbar toggle
+@navbar-default-toggle-hover-bg:           darken(@navbar-default-bg, 8%);
+@navbar-default-toggle-icon-bar-bg:        @text-color;
+@navbar-default-toggle-border-color:       darken(@navbar-default-bg, 8%);
+
+
+@navbarBackground: @gray-dark;
+@navbarBackgroundHighlight: #000;
+@navbarBackgroundHover: @navbar-default-link-color-bg;
+@navbarText: @text-color;
+@navbarLinkColor: @navbar-default-link-color;
+@navbarLinkColorHover: @navbar-default-link-hover-color; //#dbae4c;
+@linkColor: @gray-dark;
+@btnPrimaryBackground: @linkColor;
+//@wellBackground: #e3dadb;
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
+  background-color: #2c73ba; //#402B5C;
+  color: white;
+}
+
+.navbar .nav > li > a {
+  padding: 10px 10px;
+}
+
+.nav-pills.nav-stacked > li > a {
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.navbar .brand {
+  color: #ffca57; //#dbae4c;
+}
+
+.wide {
+  width: 100%
+}
+
+
+pre {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
+  word-wrap: break-word;
+  white-space: normal; 
+}
+
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
+@iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+
+// Font Awesome
+@import "fontawesome/font-awesome";
+
+// Glyphicons
+//@import "twitter/bootstrap/sprites.less";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/customize.html#variables for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+

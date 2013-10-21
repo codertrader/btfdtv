@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BTFDtv</title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "ytv", :media => "all"  %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "ytv" %>
+
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="rrxsieen8kpvfcg"></script>
+
+  <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="gu0M6k7t4ahX0ifdHXsGM4_O13K2Sh_hs58NhL4n5rU" />
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44572631-1', 'btfd.tv');
+  ga('send', 'pageview');
+
+  jQuery.support.cors = true;
+  $.support.cors = true;
+</script>
+
+
+<script type="text/javascript">
+
+<!-- Video Tags -->
+
+    function getActiveSlug() {
+      var selectedLink = $("ul#video-tabs > li.active > a")[0].id;
+      var activeSlug = 'OFFAIR';
+      if( selectedLink == 'archive-link' ) {
+        activeSlug = $("#archive-slug").text();
+      }
+      if( selectedLink == 'live-link' ) {
+        activeSlug = recentVideo.id;
+      }
+      if( selectedLink == 'direct-link' ) {
+        activeSlug = '<%=params[:direct]%>';
+      }
+      return activeSlug;
+    }
+
+    function addVideoTag(tag) {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
+        var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
+        var data = {
+                    userId: userId,
+                    video: {slug:slug, stream_id:streamId},
+                    tag: tag
+                   };
+        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
+        $.post( stream_video_tags_path, data, null, "script");
+    }
+
+    function deleteVideoTag(tag,id) {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
+        var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
+        var data = {
+                    userId: userId,
+                    video: {slug:slug, stream_id:streamId},
+                    tag: tag,
+		    _method: 'delete'
+                   };
+        var delete_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags/' + encodeURIComponent(tag) + '.js';
+        $.post( delete_video_tags_path, data, null, "script");
+        $('#' + id).remove();
+    }
+
+    function refreshVideoTags() {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>;
+        var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+        var slug = getActiveSlug();
+        var data = {
+                    userId: userId,
+                    video: {slug:slug, stream_id:streamId}
+                   };
+        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
+        $.get( stream_video_tags_path, data, null, "script");
+    }
+
+
+<!-- End Video Tags -->
+
+
+  $(document).ready(function() {
+
+  $('#stream-video-tag').bind('keypress', function(e) {
+	if(e.keyCode==13){ // enter pressed
+           addVideoTag( $(this).val() );
+           $(this).val('');
+	}
+  });
+ 
+  $('#refresh-video-tags').click( function() {
+     refreshVideoTags(); 
+  });
+ 
+  $.ajaxSetup({
+    timeout: 0
+  });
+
+  // add an event listener to a Chooser button
+ if( document.getElementById("file-chooser") ) {
+    document.getElementById("file-chooser").addEventListener("DbxChooserSuccess",
+        function(e) {
+            for( var i = 0; i < e.files.length; ++i ) {
+              var file = e.files[i];
+              submitWithAjax(file); 
+            }
+
+        }, false);
+
+
+    document.getElementById("file-chooser").addEventListener("DbxChooserCancel",
+        function(e) {
+            // for testing: alert("File Chooser Canceled.");
+        }, false);
+}
+
+    function submitWithAjax(file) {
+        var userId = <%if logged_in?%><%= current_user.id %><%else%> -1 <%end%>; 
+	var streamId = <%unless @stream.nil?%><%= @stream.id %><%else%> -1 <%end%>;
+	var data = {
+		    attachment: {stream_id:streamId, name:file.name, link:file.link, bytes:file.bytes, icon:file.icon, thumbnails_64x64:file.thumbnails['64x64']},
+		    user: {id:userId} 
+		   };
+        $.post( '<%=attachments_path(:format=>'js')%>', data, null, "script");
+    }
+/*
+(function(d) {
+    var cwjs, id='chatwing-js';  if(d.getElementById(id)) {return;}
+    cwjs = d.createElement('script'); cwjs.type = 'text/javascript'; cwjs.async = true; cwjs.id = id
+    cwjs.src = "//chatwing.com/code/76d898a5-08ba-4245-9638-7ffbd03e5b23/popout";
+    d.getElementsByTagName('head')[0].appendChild(cwjs);
+  })(document);
+*/
+
+});
+
+</script>
+
+</head>
+<body data-no-turbolink>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/"><i class="icon-home"></i>BTFDtv</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="divider-vertical"></li>
+	    <!--li><%= link_to  raw('<i class="icon-comments"></i> Chat'), '#', :onclick => "$('#chatwing-button-76d898a5-08ba-4245-9638-7ffbd03e5b23 > input').trigger('click');" %></li-->
+	    <li><%= link_to  raw('<i class="icon-user"></i> Contributors'), contributors_path %></li>
+            <li><%= link_to  raw('<i class="icon-calendar"></i> Schedule'), schedules_path %></li>
+            <li><%= link_to  raw('<i class="icon-list"></i> Disclaimers'), disclaimers_path %></li>
+	    <li><%= link_to  raw('<i class="icon-bullhorn"></i> Editorials'), editorials_path %></li>
+            <li><%= link_to  raw('<i class="icon-pencil"></i> Contact Us'), "http://www.twitter.com/BTFDtv", {:target=>'blank'} %></li>
+	  </ul>
+	  <ul class="nav pull-right"> 
+            <% if current_user %>
+              <li><%= link_to "Log out", logout_path %></li>
+            <% else %>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Sign up", signup_path %></li>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>   
+	  </ul>
+        </div>
+      </div>
+    </div>
+
+  <% Announcement.current(cookies.signed[:hidden_announcement_ids]).each do |announcement| %>
+    <%= div_for announcement, :class=>"extendfull" do %>
+      <%= announcement.message %>
+      <%= link_to "Hide Announcement", hide_announcement_path(announcement), remote: true %>
+    <% end %>
+  <% end %>
+  </div>
+
+  <div class="container-fluid">
+
+    <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %>">
+         <a class="close" data-dismiss="alert" href="#">&times;</a>      
+         <%= value %>
+        </div>
+    <% end %>
+ 
+    <div class="row-fluid">
+      <div class="span9 text-left">
+        <%= yield %> 
+      </div>
+      
+      <div class="span3">
+
+       <ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="myTab" >
+        <li class="active"><a href="#about" data-toggle="pill"><%=glyph(:home)%></a></li>
+        <% if @stream and @stream.attachments %><li><a href="#attachments" data-toggle="pill" id="attachments-link"><%=glyph(:file)%></a></li><% end %>
+        <% if @stream %><li><a href="#tags" data-toggle="pill" id="attachments-link"><%=glyph(:tags)%></a></li><% end %>
+        <li><a href="#twitter" data-toggle="pill"><%=glyph(:twitter)%></a></li>
+	<li><a href="#chat" data-toggle="pill"><%=glyph(:comments)%></a></li>
+       </ul>
+
+    <div class="tab-content">
+     <div class="tab-pane active" id="about" style="overflow:hidden;">
+       
+       <div class="well">
+	<h3>BTFDtv</h3>
+        <p class="muted"><%= glyph(:star) %> 
+	<strong>BTFDtv</strong> has no producers, writers, editors or on air rules. 
+       	</p>
+        <p class="muted"><%= glyph(:music) %> 
+	<a href="itpc://dl.dropboxusercontent.com/u/224919574/feed.xml" target="blank">iTunes - Subscribe & Listen</a>.
+	</p>
+        <p class="muted"><%= glyph(:rss) %> 
+	<a href="http://feeds.feedburner.com/BtfdtvAudioPodcast" target="blank">RSS - Subscribe & Read</a>.
+	</p>
+        <p class="muted"><%= glyph(:twitter) %> 
+	<a href="http://www.twitter.com/BTFDtv" target="blank">Follow us</a>.
+	</p>
+	<p class="muted"><%= glyph(:pencil) %> 
+	<a href="mailto:BTFDtv@gmail.com" target="blank">Email us</a>.
+ 	</p>
+	<table class="table">
+	<tr>
+	<td style="text-align:left"> 	
+        <p class="muted"> 
+	Our network thrives on the support of viewers like you. 
+	</p>
+  	  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="FKXTVK8ZWA8VU">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form>
+	  <div id="bitcoin">
+            <a class="coinbase-button" data-code="21734b0c8b863d64726cf884285b6be1" data-button-style="donation_small" href="https://coinbase.com/checkouts/21734b0c8b863d64726cf884285b6be1">Donate Bitcoins</a><script src="https://coinbase.com/assets/button.js" type="text/javascript"></script>
+	  </div>
+	  <!--div id="chatwing-wrapper" style="display:none;"> 
+		<div id="chatwing-button-76d898a5-08ba-4245-9638-7ffbd03e5b23" style="display:none;"></div>
+          </div--> 
+	</td>	
+	</tr>
+	</table>
+       </div> 
+     
+    </div>
+
+    <% if @stream %> 
+    <div class="tab-pane" id="attachments">
+      <div id="attachments-well" class="attachments well">
+        <h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream)%>" data-remote="true" class="btn"><%=glyph(:refresh)%></a></h3> 
+        <% if logged_in? %>	
+	<div id="dropbox">
+          <form>
+	    <input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" data-extensions=".pdf .doc .docx .png .jpg .gif" style="visibility: hidden;"/>
+          </form>
+        </div>
+        <% else %>
+	  <p class="text-error"><strong><%= link_to 'Log in', login_path %> to share attachments.</strong></p>
+        <% end %>
+
+        <% if @stream.attachments.empty? %>	
+	  <p class="text-info">No attachments found.</p>
+          <div class="row attachment"></div>
+        <% else %>
+        <% end %>
+        <div id="attachments-recent">
+	<% @stream.attachments.order(:created_at).reverse_order.limit(10).each do |attachment| %>
+          <div class="row attachment" style="margin-left:.25em;">
+            <a href='<%=attachment.link%>' target='blank'><img src='<%=attachment.thumbnails_64x64 or attachment.icon%>' height='32px' width='32px'>&nbsp;<%=attachment.name%></a><br/>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="tab-pane" id="twitter">
+     <a class="twitter-timeline" href="https://twitter.com/search?q=%23btfdtv" data-widget-id="377524310564274176">Tweets about "#btfdtv"</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div>
+
+    <div class="tab-pane" id="chat">
+	<!-- Begin chatwing.com chatbox -->
+	<iframe src="http://chatwing.com/chatbox/76d898a5-08ba-4245-9638-7ffbd03e5b23" width="100%" height="400" frameborder="0" scrolling="0">Please contact us at info@chatwing.com if you cant embed the chatbox</iframe>
+	<!-- End chatwing.com chatbox -->
+    </div>
+
+    <% if @stream %>
+    <div class="tab-pane" id="tags">
+      <div id="tags-content" class="well">
+        <h3>Video Tags&nbsp;<a href="#" id="refresh-video-tags" class="btn"><%=glyph(:refresh)%></a></h3> 
+
+        <% if logged_in? %>
+        <div id="tags-input">
+          <p class="text-info">@people $TICKERS #topics</p>
+          <%= text_field_tag 'stream-video-tag' %> 
+        </div>
+        <% else %>
+          <p class="text-error"><strong><%= link_to 'Log in', login_path %> to tag @people $TICKERS and #topics.</strong></p>
+        <% end %>
+        <div id="tags-output">
+          <ul id="video-tags-list" style="list-style-type:none;">
+          </ul>
+        </div>
+      </div> 
+    </div>
+    <% end %>
+ 
+      </div>
+    </div>
+  </div>
+
+<!--script src="http://repository.chatwee.com/scripts/f7ee414474fe3aa5eb9a90c03ac15616.js" type="text/javascript" charset="UTF-8"></script-->
+</body>
+</html>
+

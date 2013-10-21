@@ -1,3 +1,7 @@
+<%= content_for :logo do %>
+<img id="logo-header" src="assets/images/BTFDtvLogo.gif" style="margin-top:-1.7em;" height="70px" width="70px" alt="Logo">
+<% end %>
+
 <%- model_class = Contributor -%>
 <div class="page-header">
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>

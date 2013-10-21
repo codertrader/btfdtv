@@ -1,0 +1,39 @@
+
+<!--=== Copyright ===-->
+
+<div class="copyright">
+
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-6">						
+
+	            <p class="copyright-space">
+
+                    2013 &copy; BTFDtv LLC. ALL Rights Reserved.&nbsp;&nbsp;|
+
+                    <%= link_to "Terms of Service", disclaimers_path %>
+
+                </p>
+
+			</div>
+
+			<div class="col-md-6">	
+
+				<a href="index.html">
+
+                    <img id="logo-footer" src="assets/images/BTFDtvLogo.gif" style="margin-top:1em;" height="60px" width="60px" class="pull-right" alt="" />
+
+                </a>
+
+			</div>
+
+		</div><!--/row-->
+
+	</div><!--/container-->	
+
+</div><!--/copyright-->	
+
+<!--=== End Copyright ===-->
+
