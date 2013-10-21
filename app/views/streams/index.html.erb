@@ -141,7 +141,7 @@ h4 {
 	    <% if @stream %> 
 	    <div class="tab-pane" id="attachments">
 	      <div id="attachments-well" class="attachments well">
-		<h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream)%>" data-remote="true" class="btn"><%=glyph(:refresh)%></a></h3> 
+		<h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream,:format=>'js')%>" data-remote="true" data-type="script" class="btn"><%=glyph(:refresh)%></a></h3> 
 		<% if logged_in? %>	
 		<div id="dropbox">
 		  <form>

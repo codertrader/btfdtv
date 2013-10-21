@@ -25,8 +25,7 @@ body {background-color: #2C3539;}
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
 //  background-color: #72c02c;
-//  background-color: #80b438; // green
-  background-color: #7AC624; // green
+  background-color: #80b438; // green
   color: white;
 }
 
@@ -142,7 +141,7 @@ h4 {
 	    <% if @stream %> 
 	    <div class="tab-pane" id="attachments">
 	      <div id="attachments-well" class="attachments well">
-		<h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream)%>" data-remote="true" class="btn"><%=glyph(:refresh)%></a></h3> 
+		<h3>Attachments&nbsp;<a href="<%=stream_attachments_path(@stream,format=>'js')%>" data-remote="true" class="btn"><%=glyph(:refresh)%></a></h3> 
 		<% if logged_in? %>	
 		<div id="dropbox">
 		  <form>

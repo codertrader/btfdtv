@@ -22,7 +22,9 @@
     <meta name="author" content="">
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript" src="assets/plugins/jquery-1.10.2.min.js"></script>
+<!--script type="text/javascript" src="assets/plugins/jquery-1.10.2.min.js"></script-->
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "jquery_ujs" %>
 
 <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
 
@@ -71,7 +73,7 @@
 
     <!--link rel="stylesheet" href="assets/css/themes/default.css" id="style_color"-->
 
-    <link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1">    
+    <!--link rel="stylesheet" href="assets/css/themes/headers/default.css" id="style_color-header-1"-->    
 
   <%= stylesheet_link_tag    "ytv", :media => "all"  %>
   <!-- %= javascript_include_tag "application" % -->
@@ -152,8 +154,11 @@
                     userId: userId,
                     video: {slug:slug, stream_id:streamId}
                    };
-        var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
-        $.get( stream_video_tags_path, data, null, "script");
+
+	if(data.video.slug) {
+          var stream_video_tags_path = 'streams/' + streamId + '/videos/' + data.video.slug + '/tags.js';
+          $.get( stream_video_tags_path, data, null, "script");
+	}
     }
 
 <!-- End Video Tags -->
