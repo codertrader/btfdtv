@@ -248,8 +248,10 @@ h4 {
 
   $(document).ready( function() {
 
+       $('#dropdown-streams').addClass('active');
+
        $(function () {
-         $('#video-tabs a:first').tab('show')
+         $('#video-tabs a:first').tab('show');
        });
 
        $('#video-tabs a').click(function (e) {
@@ -273,7 +275,7 @@ h4 {
 								$("#live-title").html( 'BTFDtv is currently OFF AIR. The next LIVE show will play automatically.'  );
 							  } else { 
 								recentVideo = videos[0];
-								$("#live-link").css('background-color','#72c02c'); 
+								$("#live-link").css('background-color','#80b438'); 
 								$("#live-link").html('<%=glyph(:microphone)%> LIVE');
 								$("#live-title").html( videos[0].title );
 							  }
