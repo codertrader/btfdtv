@@ -6,11 +6,10 @@
   $('#dropdown-home').addClass('active');
 </script>
 
-
 <!--=== Breadcrumbs ===-->
 <div class="breadcrumbs margin-bottom-40">
     <div class="container">
-        <h2 class="pull-left">Log In to BTFDtv<small>Join the Conversation</small></h2>
+        <h2 class="pull-left">Log In to BTFDtv</h2>
         <ul class="pull-right breadcrumb">
             <li><a href="/">Home</a></li>
             <li><a href="/login">Pages</a></li>

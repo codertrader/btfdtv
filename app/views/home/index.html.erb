@@ -90,7 +90,7 @@
 
             <div class="col-md-3">
 
-                <a href="#" class="btn-buy hover-effect">Sign up Now</a>            
+                <a href="/signup" class="btn-buy hover-effect">Sign up Now</a>            
 
             </div>
 
@@ -431,9 +431,8 @@
 	        <li>
                   <a href='<%=contributor_path(contributor)%>'>
                     
-			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'')%>                     
-			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
-		
+		    <%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'') %>                     
+		    <%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
                   </a>
 		  <h5><%=link_to "@#{contributor.twitter}", contributor_path(contributor)%></h5>
                 </li>

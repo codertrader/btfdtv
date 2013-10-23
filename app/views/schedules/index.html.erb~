@@ -21,10 +21,4 @@
 <% end %>
 <!--=== End Breadcrumbs ===-->
 
-<div class="container-fluid">
-  <div class="row-fluid">
-	<div class="col-md-12 pull-center">
-	  <iframe seamless height="700" width="100%" src="https://docs.google.com/spreadsheet/pub?key=0ApJIMtGRgyjCdEFyeURCTl9seThTN3dvMk5GejR3S3c&output=html"></iframe>
-	</div>
-  </div>
-</div>
+<iframe seamless height="700" width="100%" src="https://docs.google.com/spreadsheet/pub?key=0ApJIMtGRgyjCdEFyeURCTl9seThTN3dvMk5GejR3S3c&output=html"></iframe>

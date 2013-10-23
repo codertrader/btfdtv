@@ -435,7 +435,7 @@
 			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
 		
                   </a>
-		  <h5><%=link_to "@#{contributor.twitter}", contributors_path(contributor)%></h5>
+		  <h5><%=link_to "@#{contributor.twitter}", contributor_path(contributor)%></h5>
                 </li>
 		<% end %>
 		</ul>
