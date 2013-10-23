@@ -14,11 +14,24 @@
 
         <div class="da-slide">
 
-            <h2><i>A FRESH</i> <br /> <i>FULLY TRANSPARENT</i> <br /> <i>NETWORK</i></h2>
+            <h2><i>THE ONLY</i> <br /> <i>FULLY TRANSPARENT</i> <br /> <i>NETWORK</i></h2>
 
             <p><i>News, information, education</i> <br /> <i>and entertainment</i> <br /> <i>you simply won't see anywhere else.</i></p>
 
-            <div class="da-img"><img src="assets/plugins/parallax-slider/img/1.png" alt="" /></div>
+	    <div class="da-img"><img src="/assets/images/BTFDtvLarge.png"/></div>
+
+        </div>
+
+        <div class="da-slide">
+
+            <h2><i>CONNECT WITH THE SOURCE.</i> <br /> <i>DO YOUR OWN</i> <br /> <i>DUE DILLIGENCE.</i></h2>
+
+            <p><i>Hear from traders in the pit.</i> <br /> <i>See farmers in the field.</i> <br /> <i>Ask questions. Be answered.</i></p>
+
+            <div class="da-img">
+	    <iframe src="http://player.vimeo.com/video/77616149" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
+		<!--img src="assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01" /--></div>
+
 
         </div>
 
@@ -29,30 +42,18 @@
             <p><i>Get what you need when you need it.</i> <br /> <i>Take it with you & share it.</i></p>
 
             <div class="da-img">
-
-				<iframe src="http://player.vimeo.com/video/47911018" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
-
+	        <img src="/assets/plugins/parallax-slider/img/1.png" alt="" />
             </div>
 
         </div>
 
         <div class="da-slide">
 
-            <h2><i>CONNECT WITH THE SOURCE.</i> <br /> <i>DO YOUR OWN</i> <br /> <i>DUE DILLIGENCE.</i></h2>
-
-            <p><i>Hear from traders in the pit.</i> <br /> <i>See farmers in the field.</i> <br /> <i>Ask questions. Be answered.</i></p>
-
-            <div class="da-img"><img src="assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01" /></div>
-
-        </div>
-
-        <div class="da-slide">
-
-            <h2><i>STAY CONNECTED.</i> <br /> <i>BE NOTIFIED.</i> <br /> <i>SHARE YOUR STORY.</i></h2>
+            <h2><i>STAY CONNECTED.</i> <br /> <i>BE NOTIFIED.</i> <br /> <i>WATCH AND LEARN.</i></h2>
 
             <p><i>Talk with show hosts &amp guests.</i> <br /> <i>One way communication is over.</i> <br /> <i>Welcome to BTFDtv.</i></p>
 
-            <div class="da-img"><img src="assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01" /></div>
+	    <div class="da-img"><img src="/assets/images/BTFDtvLarge.png"/></div>
 
         </div>
 
@@ -90,7 +91,8 @@
 
             <div class="col-md-3">
 
-                <a href="#" class="btn-buy hover-effect">Sign up Now</a>            
+                <a href="/streams" class="btn-buy hover-effect">&nbsp;WATCH&nbsp;</a>           
+                <a href="/signup" class="btn-buy hover-effect">SIGN UP</a>
 
             </div>
 
@@ -174,7 +176,7 @@
 
 	<!-- Recent Works -->
 
-    <div class="headline"><h2>Recent Works</h2></div>
+    <!--div class="headline"><h2>Recent Works</h2></div>
 
     <div class="row">
 
@@ -431,9 +433,8 @@
 	        <li>
                   <a href='<%=contributor_path(contributor)%>'>
                     
-			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'')%>                     
-			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
-		
+		    <%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'') %>                     
+		    <%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
                   </a>
 		  <h5><%=link_to "@#{contributor.twitter}", contributor_path(contributor)%></h5>
                 </li>

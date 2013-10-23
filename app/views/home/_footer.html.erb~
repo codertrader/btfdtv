@@ -17,25 +17,11 @@
 
 	            <!-- Monthly Newsletter -->
 
-		        <div class="headline"><h2>Monthly Newsletter</h2></div>	
+		        <div class="headline"><h2>Join the Community</h2></div>	
 
-				<p>Subscribe to our newsletter and stay up to date!</p>
+				<p>Register with us</p>
 
-				<form class="footer-subsribe">
-
-                    <div class="input-group">
-
-                        <input type="text" class="form-control" placeholder="Email Address">                            
-
-                        <span class="input-group-btn">
-
-                            <button class="btn-u" type="button">Subscribe</button>
-
-                        </span>
-
-                    </div><!-- /input-group -->                    
-
-				</form>							
+									
 
 			</div><!--/col-md-4-->	
 
@@ -85,6 +71,7 @@
 
                 </div-->
 
+                <div class="headline"><h2>Recent Videos Here Soon</h2></div>	
 		<img src="/assets/images/BTFDtvLarge.png" width="100%"/>
 
 			</div><!--/col-md-4-->
@@ -119,19 +106,19 @@
 
                 <ul class="social-icons">
 
-                    <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                    <li><a target="_blank" href="http://feeds.feedburner.com/BtfdtvAudioPodcast" data-original-title="Feed" class="social_rss"></a></li>
 
-                    <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                    <!--li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li-->
 
-                    <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                    <li><a target="_blank" href="http://www.twitter.com/BTFDtv" data-original-title="Twitter" class="social_twitter"></a></li>
 
-                    <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                    <li><a target="_blank" href="https://plus.google.com/b/103142149934679365603" data-original-title="Google Plus" class="social_googleplus"></a></li>
 
-                    <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                    <!--li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
 
                     <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
 
-                    <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                    <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li-->
 
                 </ul>
 
