@@ -298,11 +298,11 @@
 
 	<!-- Info Blokcs -->
 
-	<div class="row">
+	<!--div class="row">
 
     	<!-- Welcome Block -->
 
-		<div class="col-md-8">
+		<!--div class="col-md-8">
 
 			<div class="headline"><h2>Welcome To BTFDtv</h2></div>
 
@@ -350,7 +350,7 @@
 
         <!-- Latest Shots -->
 
-        <div class="col-md-4">
+        <!--div class="col-md-4">
 
 			<div class="headline"><h2>Latest Shots</h2></div>
 
@@ -418,229 +418,30 @@
 
         </div><!--/col-md-4-->
 
-	</div><!--/row-->	
+	<!--/div><!--/row-->	
 
 	<!-- End Info Blokcs -->
 
-
-
-	<!-- Our Clients -->
-
 	<div id="clients-flexslider" class="flexslider home clients">
 
-        <div class="headline"><h2>Our Clients</h2></div>	
+        <div class="headline"><h2>Our Contributors</h2></div>	
 
 		<ul class="slides">
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/hp_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/hp.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/igneus_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/igneus.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/vadafone_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/vadafone.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/walmart_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/walmart.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/shell_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/shell.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/natural_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/natural.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/aztec_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/aztec.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/gamescast_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/gamescast.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/cisco_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/cisco.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/everyday_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/everyday.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/cocacola_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/cocacola.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/spinworkx_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/spinworkx.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/shell_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/shell.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/natural_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/natural.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/gamescast_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/gamescast.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/everyday_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/everyday.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
-			<li>
-
-                <a href="#">
-
-                    <img src="assets/img/clients/spinworkx_grey.png" alt="" /> 
-
-                    <img src="assets/img/clients/spinworkx.png" class="color-img" alt="" />
-
-                </a>
-
-            </li>
-
+                <% @contributors.each do |contributor| %>
+	        <li>
+                  <a href='<%=contributor_path(contributor)%>'>
+                    
+			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'')%>                     
+			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
+		
+                  </a>
+		  <h5><%=link_to "@#{contributor.twitter}", contributor_path(contributor)%></h5>
+                </li>
+		<% end %>
 		</ul>
 
 	</div><!--/flexslider-->
 
-	<!-- End Our Clients -->
 
 </div><!--/container-->		
 

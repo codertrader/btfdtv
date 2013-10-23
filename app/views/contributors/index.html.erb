@@ -23,7 +23,29 @@
 <% end %>
 <!--=== End Breadcrumbs ===-->
 
+
+<div class="container-fluid">
   <div class="col-md-12">
+    <div class="row-fluid">
+		<div id="clients-flexslider" class="flexslider home clients">
+
+		<ul class="slides">
+                <% @contributors.each do |contributor| %>
+	        <li>
+                  <a href='<%=contributor_path(contributor)%>'>
+			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'')%>                     
+			<%=image_tag(avatar_url(contributor,125), :width=>125, :height=>125, :alt=>'Gravatar', :class=>'color-img')%>
+                  </a>
+		  <h5><%=link_to "@#{contributor.twitter}", contributor_path(contributor)%></h5>
+                </li>
+		<% end %>
+		</ul>
+
+	</div><!--/flexslider-->
+
+
+    </div>
+
     <div class="row-fluid">
 
 	<table class="table table-striped" id="contributors">
@@ -42,7 +64,7 @@
 	  <tbody>
 	    <% @contributors.each do |contributor| %>
 	      <tr>
-		<td><%= link_to(image_tag(avatar_url(contributor), :width=>48, :height=>48, :alt=>'Gravatar'), contributor_path(contributor)) %></td>
+		<td><%= link_to(image_tag(avatar_url(contributor,48), :width=>48, :height=>48, :alt=>'Gravatar'), contributor_path(contributor)) %></td>
 		<td><%= contributor.name %></td>
 		<td><%= link_to(contributor.twitter, "http://www.twitter.com/#{contributor.twitter}", :target=>'blank') %></td>
 		<td><%= link_to('Bio', contributor_path(contributor))%></td>
@@ -69,4 +91,6 @@
 		    :class => 'btn btn-primary' %>
 	      <% end %>
   </div>
+ </div>
 </div>
+

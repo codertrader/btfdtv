@@ -28,7 +28,7 @@
 	  <div class="col-md-2">
 	    <%= image_tag(avatar_url(@contributor,150), :width=>150, :height=>150, :alt=>'Gravatar') %>
 	  </div>
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    <table id="contributor-data" class="table table-striped" style="">
 	      <tbody> 
 		<tr class="table-row"><td class=""><strong>Name</strong></td><td class=""><%= @contributor.name %>&nbsp;</td></tr>
@@ -38,7 +38,7 @@
 	      </tbody> 
 	     </table>
 	  </div> 
-	 <div class="col-md-6">
+	 <div class="col-md-5">
 	   <strong>Biography</strong><br/>
 	   <dd><%= simple_format @contributor.full_bio %></dd><br/>
 	 </div> 

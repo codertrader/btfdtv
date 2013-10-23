@@ -1,10 +1,14 @@
+<%= content_for :logo do %>
+<img id="logo-header" src="assets/images/BTFDtvLogo.gif" style="margin-top:-1.7em;" height="70px" width="70px" alt="Logo">
+<% end %>
+
 <%- model_class = Disclaimer -%>
 
 <!--=== Breadcrumbs ===-->
 <%= content_for :breadcrumbs do %>
 <div class="breadcrumbs margin-bottom-40">
     <div class="container">
-        <h1 class="pull-left"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>&nbsp;<small>Required Reading</small></h1>
+        <h2 class="pull-left"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>&nbsp;<small>Required Reading</small></h2>
         <ul class="pull-right breadcrumb">
             <li><a href="/">Home</a></li>
             <li><a href="">Legal</a></li>
@@ -19,7 +23,7 @@
   <div class="col-md-12">
     <div class="row-fluid">
 	<table class="table table-striped">
-	  <thead>
+	  <!--thead>
 	    <tr>
 	      <th><%= model_class.human_attribute_name(:description) %></th>
 	      <th><%= model_class.human_attribute_name(:disclaimer) %></th>
@@ -27,7 +31,7 @@
 	      <th><%=t '.actions', :default => t("helpers.actions") %></th>
 	      <% end %>
 	    </tr>
-	  </thead>
+	  </thead-->
 	  <tbody>
 	    <% @disclaimers.each do |disclaimer| %>
 	      <tr>

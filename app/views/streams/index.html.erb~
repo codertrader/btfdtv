@@ -4,7 +4,7 @@
 <% end %>
 
 <style>
-body {background-color: #2C3539;}
+body {background-color: darkgray;}
 
 .header .navbar-default .navbar-nav > li > a {
   color: #D1D0CE; // light grey
@@ -395,7 +395,7 @@ h4 {
             for (var k in options.playopts) {
                 src+= k + '=' + options.playopts[k] + '&';
             }
-            src += '_a=b';
+            src += '_a=b&wmode=opaque';
         }
         ifr.attr('src', src);
      } else {
