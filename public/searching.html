@@ -1,0 +1,132 @@
+<DOCTYPE!>
+<html>
+<head>
+<style type="text/css">
+body {
+	padding: 0;
+	margin: 0;
+	color: white;
+	background-color: #2C3539;
+}
+
+#SandBox {
+  padding: 10px 0 20px 0;
+  background: #000 url(swatch_sandbox.gif);
+  overflow: visible;
+}
+</style>
+<script src="/assets/jquery.js?body=1"></script>
+<script src="/assets/jquery_ujs.js?body=1"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+
+<script type="text/javascript">
+  
+  var API_KEY = 'AIzaSyCRV03KpFosQojWCk0py-lcYTzrvrguiWE';
+
+  googleApiClientReady = function() {
+    gapi.auth.init(function() {
+      window.setTimeout(checkAuth, 1);
+    });
+  }
+
+  function checkAuth() {
+    loadAPIClientInterfaces();
+  }
+
+  function loadAPIClientInterfaces() {
+    gapi.client.load('youtube', 'v3', function() {
+      handleAPILoaded();
+    });
+  }
+
+  // Once the api loads call a function to get the uploads playlist id.
+  function handleAPILoaded() {
+    gapi.client.setApiKey(API_KEY);
+    windowReady();
+  }
+
+  windowReady = function() {
+  	console.log('Youtube API is ready.');
+  }
+
+  function searchYoutube(q) {
+   $('#search-results').empty().append('Searching...');
+
+  	console.log('*********************');
+  	console.log('youtube.channels.list');
+  	var requestOptions = {part:'snippet',forUsername:'BTFDtv'};
+    var request = gapi.client.youtube.channels.list(requestOptions);
+    
+    request.execute(function(channelResults) {
+    	console.log("pageInfo:" + channelResults.pageInfo);
+    	console.log("items[0].id:" + channelResults.items[0].id);
+    	console.log("items[0].snippet.description:" + channelResults.items[0].snippet.description);
+
+    	narrowSearchResultsToChannel(q, channelResults.items[0].id);
+    });
+  }
+
+  function narrowSearchResultsToChannel(q,channelId) {
+  	console.log('*******************');
+    console.log('youtube.search.list');
+    var requestOptions = {
+      part: 'snippet',
+      channelId: channelId,
+      order: 'date',
+      maxResults: 50,
+      type: 'video',
+      q: q
+    };
+    var request = gapi.client.youtube.search.list(requestOptions);
+
+    request.execute(function(searchResponse) {
+      console.log("nextPageToken:"+ searchResponse.nextPageToken);
+      console.log("prevPageToken:"+ searchResponse.prevPageToken);
+      console.log("pageInfo.totalResults:"+ searchResponse.pageInfo.totalResults);
+      console.log("pageInfo.resultsPerPage:"+ searchResponse.pageInfo.resultsPerPage);
+      
+      $('#search-results').empty();
+
+      for( var each in searchResponse.items) {
+    	var item = searchResponse.items[each];
+
+		/*var list = '';
+        list += '<li><a href="#" data-ytv="'+(item.id.videoId)+'" class="ytv-clear" data-title="'+(item.snippet.title)+'">';
+        list += '<div class="ytv-thumb"><div class="ytv-thumb-stroke"></div><span>'+'(time)'+'</span><img src="'+(item.snippet.thumbnails.default.url)+'"></div>';
+        list += '<div class="ytv-content"><b>'+(item.snippet.title)+'</b></div>';
+        //list += '</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span></div>';
+        list += '</a></li>';
+
+						var $li = $(list); 
+						$('#search-results').append( $li );*/
+
+    	$('#search-results').append('<li><a href="/'+item.id.videoId+'">'
+    										//+'<img src=\"'+item.snippet.thumbnails.default.url+'\"</img>'
+    										+'<span>'+item.snippet.title+'</span>'
+    								   +'</a></li>');
+      }
+    });
+  }
+   
+  $(document).ready(function() {
+	  $('input#q').keypress(function (e) {
+	    if (e.which == 13) {
+	      e.preventDefault();
+	      searchYoutube($('input#q').val());
+	    }
+	  });
+  });
+</script>
+ 
+<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+</head>
+<body>
+  <div id="SandBox">
+    <div id="search-fields">
+    	<label><%=glyph(:search)%></label>&nbsp;<input type="text" id="q" size="50"></input>
+    </div>
+    <ul id="search-results">
+    </ul>
+  </div>	
+</body>
+</html>

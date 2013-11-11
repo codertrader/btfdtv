@@ -1,10 +1,11 @@
 <%= content_for :logo do %>
-<!--img id="logo-header" src="assets/images/BTFD-roku-366x210.jpg" class="pull-left" style="display:inline-block; margin-top:-1.7em; margin-left:-1em; padding:0; z-index:-5" height="70px" alt="Logo"-->
 <img id="logo-header" src="assets/images/BTFDtvDark.png" style="margin-top:-1.7em;" height="70px" width="70px" alt="Logo">
 <% end %>
 
 <style>
-body {background-color: #2C3539;}
+body {background-color: #2C3539; color: #D1D0CE;}
+
+li > a { color: #D1D0CE;}
 
 .header .navbar-default .navbar-nav > li > a {
   color: #D1D0CE; // light grey
@@ -16,7 +17,6 @@ body {background-color: #2C3539;}
 
 .nav-pills a:hover {
   color: #72c02c; // green
-//  color: #80b438; // green
 }
 
 .nav-pills a#live-link:hover {
@@ -24,30 +24,15 @@ body {background-color: #2C3539;}
 }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-//  background-color: #72c02c;
   background-color: #80b438; // green
   color: white;
 }
-
-/*.nav > li > a:focus {
-background-color: blue;
-}*/
 
 h4 {
   color: white;
   background-color: dark-grey;
 }
 
-/*
-.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
-    background-color: #51a351;
-    color: white;
-    font-weight: bold;
-}
-*/
-</style>
-
-<style>
 .center {
    margin: 0 auto !important;
    float: none !important;
@@ -61,6 +46,7 @@ h4 {
 		<ul class="nav nav-pills" style="width:100%; margin-bottom:0.5em;" id="video-tabs" >
 		  <li class="active"><a href="#live" data-toggle="pill" id="live-link"><%=glyph(:microphone)%> CHECKING...</a></li>
 		  <li><a href="#archive" data-toggle="pill" id="archive-link"><%=glyph(:briefcase) %> Archive</a></li>
+      <li><a href="#search" data-toggle="pill" id="search-link"><%=glyph(:search) %> Search</a></li>
 		<% if params[:direct] %>
 		  <li><a href="#direct" data-toggle="pill" id="direct-link"><%=glyph(:bookmark) %> Direct</a></li>
 		<% end %>
@@ -80,6 +66,21 @@ h4 {
 		    </div>
 		    <div class="row-fluid"><div class="youtube-metadata" class="col-md-12"><i><h4 id="archive-title"></h4></i><h4 id="archive-slug" style="display:none;"></h4></div></div>
 		  </div>
+
+      <div class="tab-pane" id="search">
+        <div class="row-fluid">
+          <div id="search-youtube" class="col-md-12">
+            <div id="search-fields">
+              <span>Note: Searches are limited to 50 results</span><br/>              
+              <div class="input-group margin-bottom-20">
+                  <span class="input-group-addon"><i class="icon-search"></i></span>     
+                  <input type="text" id="q" size="30" class="form-control"></input>
+              </div> 
+            </div>
+            <ul id="search-results"></ul>
+          </div>
+        </div>
+      </div>
 
 		  <div class="tab-pane" id="direct" style="overflow:hidden;">
 		    <div class="row-fluid">
@@ -145,7 +146,7 @@ h4 {
 		<% if logged_in? %>	
 		<div id="dropbox">
 		  <form>
-		    <input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" data-extensions=".pdf .doc .docx .png .jpg .gif" style="visibility: hidden;"/>
+		    <input id="file-chooser" type="dropbox-chooser" name="selected-file" data-multiselect="true" style="visibility: hidden;"/>
 		  </form>
 		</div>
 		<% else %>
@@ -320,13 +321,6 @@ h4 {
  
   var d = [];
   d = s.match(re);
- 
-  // "2010-12-07T11:00:00.000-09:00" parses to:
-  //  ["2010-12-07T11:00:00.000-09:00", "2010", "12", "07", "11",
-  //     "00", "00", ".000", "-09:00", "-", "09", "00"]
-  // "2010-12-07T11:00:00.000Z" parses to:
-  //  ["2010-12-07T11:00:00.000Z",      "2010", "12", "07", "11", 
-  //     "00", "00", ".000", "Z", undefined, undefined, undefined]
  
   if (! d) {
     return '0'; // throw "Couldn't parse ISO 8601 date string '" + s + "'";
@@ -581,6 +575,74 @@ h4 {
     setTimeout(updateLiveEvent, 10000);
   }
       
+  function searchYoutube(q) {
+   $('#search-results').empty().append('Searching...');
+
+    console.log('*********************');
+    console.log('youtube.channels.list');
+    var requestOptions = {part:'snippet',forUsername:'BTFDtv'};
+    var request = gapi.client.youtube.channels.list(requestOptions);
+    
+    request.execute(function(channelResults) {
+      console.log("pageInfo:" + channelResults.pageInfo);
+      console.log("items[0].id:" + channelResults.items[0].id);
+      console.log("items[0].snippet.description:" + channelResults.items[0].snippet.description);
+
+      narrowSearchResultsToChannel(q, channelResults.items[0].id);
+    });
+  }
+
+  function narrowSearchResultsToChannel(q,channelId) {
+    console.log('*******************');
+    console.log('youtube.search.list');
+    var requestOptions = {
+      part: 'snippet',
+      channelId: channelId,
+      order: 'date',
+      maxResults: 50,
+      type: 'video',
+      q: q
+    };
+    var request = gapi.client.youtube.search.list(requestOptions);
+
+    request.execute(function(searchResponse) {
+      console.log("nextPageToken:"+ searchResponse.nextPageToken);
+      console.log("prevPageToken:"+ searchResponse.prevPageToken);
+      console.log("pageInfo.totalResults:"+ searchResponse.pageInfo.totalResults);
+      console.log("pageInfo.resultsPerPage:"+ searchResponse.pageInfo.resultsPerPage);
+      
+      $('#search-results').empty();
+
+      for( var each in searchResponse.items) {
+      var item = searchResponse.items[each];
+
+    /*var list = '';
+        list += '<li><a href="#" data-ytv="'+(item.id.videoId)+'" class="ytv-clear" data-title="'+(item.snippet.title)+'">';
+        list += '<div class="ytv-thumb"><div class="ytv-thumb-stroke"></div><span>'+'(time)'+'</span><img src="'+(item.snippet.thumbnails.default.url)+'"></div>';
+        list += '<div class="ytv-content"><b>'+(item.snippet.title)+'</b></div>';
+        //list += '</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span></div>';
+        list += '</a></li>';
+
+            var $li = $(list); 
+            $('#search-results').append( $li );*/
+
+      $('#search-results').append('<li><a href="/'+item.id.videoId+'">'
+                        //+'<img src=\"'+item.snippet.thumbnails.default.url+'\"</img>'
+                        +'<span>'+item.snippet.title+'</span>'
+                       +'</a></li>');
+      }
+    });
+  }
+   
+  $(document).ready(function() {
+    $('input#q').keypress(function (e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        searchYoutube($('input#q').val());
+      }
+    });
+  });
+
 </script>
 
 <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
