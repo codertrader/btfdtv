@@ -639,7 +639,7 @@ h4 {
       if (e.which == 13) {
         e.preventDefault();
         searchYoutube($('input#q').val());
-      }
+        $("input#q").blur();      }
     });
   });
 
